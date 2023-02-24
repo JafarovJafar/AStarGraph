@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Graph : MonoBehaviour
@@ -8,8 +9,11 @@ public class Graph : MonoBehaviour
     public event Action<float> SearchTimeUpdated;
     public event Action SearchFinished;
 
+    [SerializeField] private List<GraphNode> _nodes;
+    [SerializeField] private GraphNode _startNode;
+
     private Coroutine _searchCoroutine;
-    
+
     public void Init()
     {
 
@@ -23,9 +27,9 @@ public class Graph : MonoBehaviour
     private IEnumerator SearchCoroutine()
     {
         SearchStarted?.Invoke();
-        
+
         //
-        
+
         SearchFinished?.Invoke();
         yield break;
     }
