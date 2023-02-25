@@ -40,7 +40,7 @@ public class SceneController
         // пока что рандомно выбирает точки
         // в будущем надо добавить выбор вершины по клику
         _startNode = _graph.Nodes[0];
-        _goalNode = _graph.Nodes[Random.Range(0, _graph.Nodes.Count - 1)];
+        _goalNode = _graph.Nodes[Random.Range(1, _graph.Nodes.Count - 1)];
 
         _pathDrawer.Clear();
         _pathSearcher.StartSearch(_startNode, _goalNode);
