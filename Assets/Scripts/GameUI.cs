@@ -1,5 +1,4 @@
 using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,6 +22,7 @@ public class GameUI : MonoBehaviour
         _searchButton.onClick.AddListener(SearchButton_Clicked);
         _timeText.Init(_graph);
         _loadingCircle.Init();
+        _loadingCircle.Hide();
         _inputBlocker.SetActive(false);
     }
 
@@ -31,10 +31,12 @@ public class GameUI : MonoBehaviour
     private void Graph_SearchStarted()
     {
         _inputBlocker.SetActive(true);
+        _loadingCircle.Show();
     }
 
     private void Graph_SearchFinished()
     {
         _inputBlocker.SetActive(false);
+        _loadingCircle.Hide();
     }
 }

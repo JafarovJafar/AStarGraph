@@ -16,7 +16,10 @@ public class Graph : MonoBehaviour
 
     public void Init()
     {
-
+        foreach (var node in _nodes)
+        {
+            node.Init();
+        }
     }
 
     public void StartSearch()
@@ -28,9 +31,50 @@ public class Graph : MonoBehaviour
     {
         SearchStarted?.Invoke();
 
-        //
+        float startTime = Time.unscaledTime;
+        GraphNode currentNode = _startNode;
+        currentNode.SetAsStartNode();
+
+        List<GraphNode> unprocessedNodes = new List<GraphNode>(_nodes);
+
+        while (true)
+        {
+            float distance;
+            float newWeight;
+
+            foreach (var neighbour in currentNode.Neighbours)
+            {
+                distance = Vector3.Distance(neighbour.Position, currentNode.Position);
+                newWeight = distance + currentNode.Weight;
+                if (neighbour.Weight < newWeight) continue;
+
+                neighbour.UpdateWeight(currentNode, newWeight);
+            }
+            
+            SearchTimeUpdated?.Invoke(Time.unscaledTime - startTime);
+
+            unprocessedNodes.Remove(currentNode);
+
+            if (unprocessedNodes.Count == 0)
+            {
+                break;
+            }
+            
+            unprocessedNodes.Sort(CompareNodes);
+            currentNode = unprocessedNodes[0];
+            
+            //if (Input.GetKeyDown(KeyCode.A)) break;
+
+            yield return null;
+        }
 
         SearchFinished?.Invoke();
-        yield break;
+    }
+
+    private int CompareNodes(GraphNode first, GraphNode second)
+    {
+        if (second.Weight > first.Weight) return 1;
+        if (first.Weight > second.Weight) return -1;
+        return 0;
     }
 }
