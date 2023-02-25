@@ -11,16 +11,16 @@ public class GameUI : MonoBehaviour
     [SerializeField] private LoadingCircle _loadingCircle;
     [SerializeField] private GameObject _inputBlocker;
 
-    private Graph _graph;
+    private PathSearcher _pathSearcher;
 
-    public void Init(Graph graph)
+    public void Init(PathSearcher pathSearcher)
     {
-        _graph = graph;
-        _graph.SearchStarted += Graph_SearchStarted;
-        _graph.SearchFinished += Graph_SearchFinished;
+        _pathSearcher = pathSearcher;
+        _pathSearcher.SearchStarted += Graph_SearchStarted;
+        _pathSearcher.SearchFinished += Graph_SearchFinished;
 
         _searchButton.onClick.AddListener(SearchButton_Clicked);
-        _timeText.Init(_graph);
+        _timeText.Init(_pathSearcher);
         _loadingCircle.Init();
         _loadingCircle.Hide();
         _inputBlocker.SetActive(false);

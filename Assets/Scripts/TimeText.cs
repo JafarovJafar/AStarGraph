@@ -4,13 +4,13 @@ using UnityEngine;
 public class TimeText : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _text;
-    
-    private Graph _graph;
-    
-    public void Init(Graph graph)
+
+    private PathSearcher _pathSearcher;
+
+    public void Init(PathSearcher pathSearcher)
     {
-        _graph = graph;
-        _graph.SearchTimeUpdated += UpdateTime;
+        _pathSearcher = pathSearcher;
+        _pathSearcher.SearchTimeUpdated += UpdateTime;
     }
 
     private void UpdateTime(float time)

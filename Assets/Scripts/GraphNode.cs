@@ -19,6 +19,15 @@ public class GraphNode : MonoBehaviour
         Weight = float.PositiveInfinity;
     }
 
+    public void DrawLines()
+    {
+        foreach (var neighbour in _neighbours)
+        {
+            GraphLine line = LinesPool.Instance.Get();
+            line.SetPoints(Position, neighbour.Position);
+        }
+    }
+
     public void SetAsStartNode() => Weight = 0f;
     
     public void UpdateWeight(GraphNode node, float weight)
@@ -33,5 +42,11 @@ public class GraphNode : MonoBehaviour
         {
             Gizmos.DrawLine(transform.position, neighbour.transform.position);
         }
+    }
+
+    public void ResetSearchVars()
+    {
+        LastNode = null;
+        Weight = float.PositiveInfinity;
     }
 }
