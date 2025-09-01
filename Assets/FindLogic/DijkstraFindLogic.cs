@@ -16,7 +16,7 @@ namespace Shafir.FindLogics
         public override void Find(Graph graph, ulong startNodeId, ulong endNodeId, Action<FindOutput> finished)
         {
             var nodes = graph.Nodes;
-            var output = new FindOutput()
+            var output = new FindOutput();
 
             // подготовка графа к поиску
             Prepare(nodes, startNodeId, _nodesToProcess);
@@ -26,7 +26,8 @@ namespace Shafir.FindLogics
 
             // собираем найденный путь
             var foundPath = CollectPath(nodes, startNodeId, endNodeId);
-            
+            output.SetNodes(foundPath);
+            output.SetSuccess(true);
         }
 
         private void Prepare

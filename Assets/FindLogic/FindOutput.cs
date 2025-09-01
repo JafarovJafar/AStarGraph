@@ -14,14 +14,6 @@ namespace Shafir.FindLogics
 
         private List<ulong> _foundPath = new();
 
-        internal FindOutput(bool isSuccess, List<ulong> foundPathNodeIds)
-        {
-            IsSuccess = isSuccess;
-
-            foreach (var pathNodeId in foundPathNodeIds)
-                _foundPath.Add(pathNodeId);
-        }
-
         internal void SetNodes(IEnumerable<ulong> nodes)
         {
             _foundPath.AddRange(nodes);
