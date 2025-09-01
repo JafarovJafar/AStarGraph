@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Shafir.FindLogics
 {
     /// <summary>
@@ -8,10 +10,31 @@ namespace Shafir.FindLogics
         public bool IsSuccess { get; private set; }
         public bool IsFinished { get; private set; }
         public float FindDuration { get; private set; }
+        public IReadOnlyList<ulong> FoundPath => _foundPath;
 
-        public FindOutput()
+        private List<ulong> _foundPath = new();
+
+        internal FindOutput(bool isSuccess, List<ulong> foundPathNodeIds)
         {
-            IsSuccess = false;
+            IsSuccess = isSuccess;
+
+            foreach (var pathNodeId in foundPathNodeIds)
+                _foundPath.Add(pathNodeId);
+        }
+
+        internal void SetNodes(IEnumerable<ulong> nodes)
+        {
+            _foundPath.AddRange(nodes);
+        }
+
+        internal void SetSuccess(bool isSuccess)
+        {
+
+        }
+
+        internal void Clear()
+        {
+            _foundPath.Clear();
         }
     }
 }

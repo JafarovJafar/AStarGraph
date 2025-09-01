@@ -7,6 +7,9 @@ namespace Shafir.FindLogics
     /// </summary>
     public abstract class FindLogic
     {
+        /// <summary>
+        /// Результат последнего поиска
+        /// </summary>
         public FindOutput Output { get; private set; }
 
         public FindLogic()
@@ -14,6 +17,6 @@ namespace Shafir.FindLogics
             Output = new FindOutput();
         }
 
-        public abstract void Find(Graph graph, Action<FindOutput> finished);
+        public abstract void Find(Graph graph, ulong startNodeId, ulong endNodeId, Action<FindOutput> finished);
     }
 }

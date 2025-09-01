@@ -2,15 +2,15 @@ namespace Shafir.FindLogics
 {
     public class Edge
     {
-        public readonly ulong StartNodeId;
-        public readonly ulong EndNodeId;
-        public readonly bool IsTwoDirectional;
+        public readonly Node StartNode;
+        public readonly Node EndNode;
+        public readonly float Cost;
 
-        public Edge(ulong startNodeId, ulong endNodeId, bool isTwoDirectional)
+        public Edge(Node startNode, Node endNode, float cost)
         {
-            StartNodeId = startNodeId;
-            EndNodeId = endNodeId;
-            IsTwoDirectional = isTwoDirectional;
+            StartNode = startNode;
+            EndNode = endNode;
+            Cost = cost;
         }
     }
 }
