@@ -28,6 +28,8 @@ namespace Shafir.FindLogics
             var foundPath = CollectPath(nodes, startNodeId, endNodeId);
             output.SetNodes(foundPath);
             output.SetSuccess(true);
+            
+            finished?.Invoke(output);
         }
 
         private void Prepare

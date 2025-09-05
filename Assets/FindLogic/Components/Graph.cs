@@ -15,22 +15,22 @@ namespace Shafir.FindLogics
 
         public void AddNode(ulong id)
         {
+            if (_nodes.ContainsKey(id))
+                return;
+
             var node = new Node(id);
             _nodes[id] = node;
         }
 
-        public void AddEdge(ulong from, ulong to, float cost)
+        public void AddEdge(ulong id, ulong from, ulong to, float cost)
         {
-            if (_nodes.ContainsKey(from) == false)
-                AddNode(from);
-
-            if (_nodes.ContainsKey(to) == false)
-                AddNode(to);
+            AddNode(from);
+            AddNode(to);
 
             var startNode = _nodes[from];
             var endNode = _nodes[to];
 
-            var edge = new Edge(startNode, endNode, cost);
+            var edge = new Edge(id, startNode, endNode, cost);
             startNode.AddEdge(edge);
             endNode.AddEdge(edge);
         }

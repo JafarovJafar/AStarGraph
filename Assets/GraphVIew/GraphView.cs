@@ -9,6 +9,8 @@ namespace Shafir.GraphViews
     /// </summary>
     public class GraphView : MonoBehaviour
     {
+        public GraphModel Model => _currentModel;
+        
         [SerializeField] private NodeView nodeViewPrefab;
         [SerializeField] private EdgeView edgeViewPrefab;
 
@@ -45,6 +47,8 @@ namespace Shafir.GraphViews
                 _nodeViews.Clear();
             }
 
+            _currentModel = model;
+            
             var modelNodes = model.Nodes.Values;
             foreach (var modelNode in modelNodes)
             {
