@@ -1,0 +1,16 @@
+{
+    "name": "Shafir.GraphView",
+    "rootNamespace": "",
+    "references": [
+        "GUID:bad7abec20652630eb0318bcf6432840"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

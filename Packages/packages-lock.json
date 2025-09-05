@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.shafir.monopool": {
+      "version": "https://github.com/JafarovJafar/shafir-monopool.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "6324da367bbe5b21d0b1920ba77381112514cc7b"
+    },
     "com.unity.ext.nunit": {
       "version": "2.0.5",
       "depth": 1,

@@ -1,0 +1,14 @@
+{
+    "name": "Shafir.FindLogics",
+    "rootNamespace": "Shafir.FindLogics",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
