@@ -21,7 +21,12 @@ namespace Shafir.FindLogics
 
         internal void SetSuccess(bool isSuccess)
         {
+            IsSuccess = isSuccess;
+        }
 
+        internal void SetDuration(float duration)
+        {
+            FindDuration = duration;
         }
 
         internal void Clear()

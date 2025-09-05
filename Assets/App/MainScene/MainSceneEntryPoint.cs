@@ -12,7 +12,7 @@ namespace Shafir.App
 
         [SerializeField] private MainWindow mainWindow;
         [SerializeField] private LoadingWindow loadingWindow;
-        
+
         [SerializeField] private LineRenderer pathLineRenderer;
 
         private DijkstraFindLogic _dijkstraFindLogic;
@@ -28,9 +28,16 @@ namespace Shafir.App
 
         private void OnStartClicked()
         {
+            mainWindow.Hide();
+            loadingWindow.Show();
+
             var searchModel = GetFindGraph(graphView.Model);
             _dijkstraFindLogic.Find(searchModel, 0, 3, output =>
             {
+                mainWindow.Show();
+                mainWindow.SetTime(output.FindDuration);
+                loadingWindow.Hide();
+
                 var points = output.FoundPath;
 
                 var linePoints = new List<Vector3>();

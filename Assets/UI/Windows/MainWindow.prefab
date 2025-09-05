@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Shafir.UI::Shafir.UI.MainWindow
   startButton: {fileID: 2608293280898987016}
+  timeLabel: {fileID: 1344663378627742759}
 --- !u!1 &872556853302692118
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,6 +320,7 @@ GameObject:
   - component: {fileID: 6807058029704957978}
   - component: {fileID: 9214854350456213731}
   - component: {fileID: 8452054864321002925}
+  - component: {fileID: 1344663378627742759}
   m_Layer: 5
   m_Name: TimeText
   m_TagString: Untagged
@@ -342,8 +344,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 810, y: 390}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -50, y: -50}
+  m_SizeDelta: {x: 512, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &9214854350456213731
 CanvasRenderer:
@@ -444,3 +446,16 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1344663378627742759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8583666727534963766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5b52eed44112954cb665b924420b4b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Shafir.UI::Shafir.UI.Label
+  label: {fileID: 8452054864321002925}

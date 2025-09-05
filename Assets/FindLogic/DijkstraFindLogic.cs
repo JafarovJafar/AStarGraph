@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Shafir.FindLogics
 {
@@ -10,8 +9,6 @@ namespace Shafir.FindLogics
     public class DijkstraFindLogic : FindLogic
     {
         private LinkedList<ulong> _nodesToProcess = new();
-
-        private int _counter;
 
         public override void Find(Graph graph, ulong startNodeId, ulong endNodeId, Action<FindOutput> finished)
         {
@@ -28,7 +25,8 @@ namespace Shafir.FindLogics
             var foundPath = CollectPath(nodes, startNodeId, endNodeId);
             output.SetNodes(foundPath);
             output.SetSuccess(true);
-            
+            //output.SetDuration(duration);
+
             finished?.Invoke(output);
         }
 
@@ -136,8 +134,6 @@ namespace Shafir.FindLogics
 
             while (listNode != null)
             {
-                if (_counter < 0)
-                    return;
                 var listNodeCost = nodes[listNode.Value].Cost;
 
                 if (nodeToAdd.Cost < listNodeCost)
