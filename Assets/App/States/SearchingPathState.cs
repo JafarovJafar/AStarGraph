@@ -7,6 +7,13 @@ namespace Shafir.App
     /// </summary>
     public class SearchingPathState : IState
     {
+        private AppContext _appContext;
+
+        public SearchingPathState(AppContext appContext)
+        {
+            _appContext = appContext;
+        }
+
         public void Enter()
         {
 
