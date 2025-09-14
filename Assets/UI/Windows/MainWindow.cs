@@ -9,7 +9,6 @@ namespace Shafir.UI
         public event Action StartClicked;
 
         [SerializeField] private Button startButton;
-        [SerializeField] private Label timeLabel;
 
         public void Initialize()
         {
@@ -19,11 +18,6 @@ namespace Shafir.UI
         private void OnStartClicked()
         {
             StartClicked?.Invoke();
-        }
-
-        public void SetTime(float time)
-        {
-            timeLabel.SetText($"Elapsed time: {time}");
         }
     }
 }
