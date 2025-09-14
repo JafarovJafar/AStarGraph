@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.shafir.fsm": "https://github.com/JafarovJafar/shafir-fsm.git",
     "com.shafir.monopool": "https://github.com/JafarovJafar/shafir-monopool.git",
     "com.unity.ide.rider": "3.0.36",
     "com.unity.ugui": "2.0.0",

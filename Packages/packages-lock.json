@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.shafir.fsm": {
+      "version": "https://github.com/JafarovJafar/shafir-fsm.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "a63a3d213eeff709cb2ddd96b98b74c1e5d57516"
+    },
     "com.shafir.monopool": {
       "version": "https://github.com/JafarovJafar/shafir-monopool.git",
       "depth": 0,
