@@ -16,7 +16,9 @@ namespace Shafir.App
 
         public void Enter()
         {
-
+            var duration = _appContext.FindLogic.Output.FindDuration;
+            _appContext.OutputWindow.SetTime(duration);
+            _appContext.AppStateMachine.ChangeState(_appContext.WaitingUserActionState);
         }
 
         public void Exit()

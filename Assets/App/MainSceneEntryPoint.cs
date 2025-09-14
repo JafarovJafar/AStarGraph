@@ -11,6 +11,7 @@ namespace Shafir.App
         [SerializeField] private GraphView graphView;
         [SerializeField] private MainWindow mainWindow;
         [SerializeField] private LoadingWindow loadingWindow;
+        [SerializeField] private OutputWindow outputWindow;
 
         private BootState _bootState;
         private WaitingUserActionState _waitingUserActionState;
@@ -38,7 +39,6 @@ namespace Shafir.App
             _searchingPathState = new(_appContext);
             _pathSearchFinishedState = new(_appContext);
 
-            _appContext.BootState = _bootState;
             _appContext.WaitingUserActionState = _waitingUserActionState;
             _appContext.SearchingPathState = _searchingPathState;
             _appContext.PathSearchFinishedState = _pathSearchFinishedState;
@@ -50,6 +50,9 @@ namespace Shafir.App
 
             _appContext.MainWindow = mainWindow;
             _appContext.LoadingWindow = loadingWindow;
+            _appContext.OutputWindow = outputWindow;
+
+            _appContext.OutputWindow.Show();
         }
     }
 }

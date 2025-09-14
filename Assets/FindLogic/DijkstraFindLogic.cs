@@ -12,8 +12,9 @@ namespace Shafir.FindLogics
 
         public override void Find(Graph graph, ulong startNodeId, ulong endNodeId, Action<FindOutput> finished)
         {
+            var startTime = DateTime.Now;
+
             var nodes = graph.Nodes;
-            var output = new FindOutput();
 
             // подготовка графа к поиску
             Prepare(nodes, startNodeId, _nodesToProcess);
@@ -23,11 +24,12 @@ namespace Shafir.FindLogics
 
             // собираем найденный путь
             var foundPath = CollectPath(nodes, startNodeId, endNodeId);
-            output.SetNodes(foundPath);
-            output.SetSuccess(true);
-            //output.SetDuration(duration);
+            Output.SetNodes(foundPath);
+            Output.SetSuccess(true);
+            var seconds = DateTime.Now.Subtract(startTime).TotalSeconds;
+            Output.SetDuration((float)seconds);
 
-            finished?.Invoke(output);
+            finished?.Invoke(Output);
         }
 
         private void Prepare
