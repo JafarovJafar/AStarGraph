@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Shafir.FSM;
+using UnityEngine;
 
 namespace Shafir.App
 {
@@ -16,8 +18,20 @@ namespace Shafir.App
 
         public void Enter()
         {
-            var duration = _appContext.FindLogic.Output.FindDuration;
+            var output = _appContext.FindLogic.Output;
+
+            var nodesPositions = new List<Vector3>();
+            var nodesIds = output.FoundPath;
+            foreach (var nodeId in nodesIds)
+            {
+                var nodePosition = _appContext.GraphView.Model.Nodes[nodeId].Position;
+                nodesPositions.Add(nodePosition);
+            }
+            _appContext.PathDrawer.SetPoints(nodesPositions);
+
+            var duration = output.FindDuration;
             _appContext.OutputWindow.SetTime(duration);
+
             _appContext.AppStateMachine.ChangeState(_appContext.WaitingUserActionState);
         }
 

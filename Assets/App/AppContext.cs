@@ -14,6 +14,7 @@ namespace Shafir.App
         public PathSearchFinishedState PathSearchFinishedState;
 
         public GraphView GraphView;
+        public PathDrawer PathDrawer;
 
         public FindLogic FindLogic;
 

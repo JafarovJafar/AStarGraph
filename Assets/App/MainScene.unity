@@ -407,34 +407,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3787096834300870387, guid: 1ddf46adee952cc4d90f03b65b87706d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 8.088
-      objectReference: {fileID: 0}
-    - target: {fileID: 3787096834300870387, guid: 1ddf46adee952cc4d90f03b65b87706d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3787096834300870387, guid: 1ddf46adee952cc4d90f03b65b87706d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.39994
-      objectReference: {fileID: 0}
-    - target: {fileID: 3787096834300870387, guid: 1ddf46adee952cc4d90f03b65b87706d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3787096834300870387, guid: 1ddf46adee952cc4d90f03b65b87706d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3787096834300870387, guid: 1ddf46adee952cc4d90f03b65b87706d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3787096834300870387, guid: 1ddf46adee952cc4d90f03b65b87706d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3787096834300870387, guid: 1ddf46adee952cc4d90f03b65b87706d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -782,6 +754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shafir.App.MainSceneEntryPoint
   graphView: {fileID: 500400401}
+  pathDrawer: {fileID: 1445227075}
   mainWindow: {fileID: 2869674147087573794}
   loadingWindow: {fileID: 3678641220344911610}
   outputWindow: {fileID: 1782614802}
@@ -1052,6 +1025,46 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3841158522785508144, guid: da6df88d3e8af984e98456530a7a5808, type: 3}
   m_PrefabInstance: {fileID: 2869674147087573793}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1445227074
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5882058173136317668, guid: 71faa7da00d28504aaefca871e371ee3, type: 3}
+      propertyPath: m_Name
+      value: PathDrawer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8836135091968862379, guid: 71faa7da00d28504aaefca871e371ee3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8836135091968862379, guid: 71faa7da00d28504aaefca871e371ee3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8836135091968862379, guid: 71faa7da00d28504aaefca871e371ee3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 71faa7da00d28504aaefca871e371ee3, type: 3}
+--- !u!114 &1445227075 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -7799407241478274253, guid: 71faa7da00d28504aaefca871e371ee3, type: 3}
+  m_PrefabInstance: {fileID: 1445227074}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3747307a2f1e436449de79e6e3c01081, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Shafir.PathDrawer::Shafir.PathDrawer
 --- !u!1 &1483016816
 GameObject:
   m_ObjectHideFlags: 0
@@ -2182,6 +2195,7 @@ SceneRoots:
   - {fileID: 889943504}
   - {fileID: 963194228}
   - {fileID: 500400400}
+  - {fileID: 1445227074}
   - {fileID: 450286474}
   - {fileID: 1907327457}
   - {fileID: 268670179}

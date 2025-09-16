@@ -9,6 +9,7 @@ namespace Shafir.App
     public class MainSceneEntryPoint : MonoBehaviour
     {
         [SerializeField] private GraphView graphView;
+        [SerializeField] private PathDrawer pathDrawer;
         [SerializeField] private MainWindow mainWindow;
         [SerializeField] private LoadingWindow loadingWindow;
         [SerializeField] private OutputWindow outputWindow;
@@ -31,6 +32,7 @@ namespace Shafir.App
         {
             _appContext = new AppContext();
             _appContext.GraphView = graphView;
+            _appContext.PathDrawer = pathDrawer;
             _appContext.FindLogic = new DijkstraFindLogic();
             _appContext.AppStateMachine = new SimpleStateMachine();
 
