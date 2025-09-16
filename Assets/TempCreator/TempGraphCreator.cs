@@ -27,6 +27,8 @@ namespace TempCreator
             }
 
             graphView.SetModel(graphModel);
+
+            gameObject.SetActive(false);
         }
     }
 }
