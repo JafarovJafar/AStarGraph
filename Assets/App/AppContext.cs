@@ -13,6 +13,8 @@ namespace Shafir.App
         public SearchingPathState SearchingPathState;
         public PathSearchFinishedState PathSearchFinishedState;
 
+        public UserInput UserInput;
+        public MainCamera MainCamera;
         public GraphView GraphView;
         public PathDrawer PathDrawer;
 
@@ -21,5 +23,8 @@ namespace Shafir.App
         public MainWindow MainWindow;
         public LoadingWindow LoadingWindow;
         public OutputWindow OutputWindow;
+        
+        public ulong StartNodeId;
+        public ulong EndNodeId;
     }
 }

@@ -8,6 +8,8 @@ namespace Shafir.App
 {
     public class MainSceneEntryPoint : MonoBehaviour
     {
+        [SerializeField] private UserInput userInput;
+        [SerializeField] private MainCamera mainCamera;
         [SerializeField] private GraphView graphView;
         [SerializeField] private PathDrawer pathDrawer;
         [SerializeField] private MainWindow mainWindow;
@@ -31,6 +33,8 @@ namespace Shafir.App
         private void InitStates()
         {
             _appContext = new AppContext();
+            _appContext.UserInput = userInput;
+            _appContext.MainCamera = mainCamera;
             _appContext.GraphView = graphView;
             _appContext.PathDrawer = pathDrawer;
             _appContext.FindLogic = new DijkstraFindLogic();

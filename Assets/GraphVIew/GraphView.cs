@@ -10,7 +10,7 @@ namespace Shafir.GraphViews
     public class GraphView : MonoBehaviour
     {
         public GraphModel Model => _currentModel;
-        
+
         [SerializeField] private NodeView nodeViewPrefab;
         [SerializeField] private EdgeView edgeViewPrefab;
 
@@ -48,12 +48,13 @@ namespace Shafir.GraphViews
             }
 
             _currentModel = model;
-            
+
             var modelNodes = model.Nodes.Values;
             foreach (var modelNode in modelNodes)
             {
                 var nodeView = ShafirMonoPool.Get(nodeViewPrefab, nodesContainer);
                 // по хорошему надо передавать модель во вью и давать ему подписаться
+                nodeView.SetName($"Node_{modelNode.Id}");
                 nodeView.SetId(modelNode.Id);
                 nodeView.SetPosition(modelNode.Position);
                 _nodeViews.Add(modelNode.Id, nodeView);
