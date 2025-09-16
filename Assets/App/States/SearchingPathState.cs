@@ -21,7 +21,7 @@ namespace Shafir.App
             _appContext.LoadingWindow.Show();
 
             var searchModel = GetFindGraph(_appContext.GraphView.Model);
-            _appContext.FindLogic.Find(searchModel, 0, 3, output =>
+            _appContext.FindLogic.Find(searchModel, _appContext.StartNodeId, _appContext.EndNodeId, output =>
             {
                 _appContext.AppStateMachine.ChangeState(_appContext.PathSearchFinishedState);
             });

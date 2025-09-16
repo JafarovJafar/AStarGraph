@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2815317790338483050}
   - component: {fileID: 4043163493135066177}
+  - component: {fileID: 520567980666309179}
   m_Layer: 0
   m_Name: NodeView
   m_TagString: Untagged
@@ -46,6 +47,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Shafir.GraphView::Shafir.GraphViews.NodeView
   text: {fileID: 1384837348845649055}
+--- !u!135 &520567980666309179
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2825657241902723711}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2863867188158587936
 GameObject:
   m_ObjectHideFlags: 0

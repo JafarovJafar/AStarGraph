@@ -13,9 +13,11 @@ namespace Shafir.GraphViews
         public bool IsActive => gameObject.activeSelf;
         public Vector3 Position => transform.position;
         public IReadOnlyList<EdgeView> Edges => _edges;
+        public ulong Id => _id;
 
         [SerializeField] private TextMeshPro text;
 
+        private ulong _id;
         private List<EdgeView> _edges = new();
 
         public void Activate()
@@ -23,8 +25,14 @@ namespace Shafir.GraphViews
             gameObject.SetActive(true);
         }
 
+        public void SetName(string name)
+        {
+            gameObject.name = name;
+        }
+
         public void SetId(ulong id)
         {
+            _id = id;
             text.text = id.ToString();
         }
 
