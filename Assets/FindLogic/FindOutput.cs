@@ -16,6 +16,7 @@ namespace Shafir.FindLogics
 
         internal void SetNodes(IEnumerable<ulong> nodes)
         {
+            _foundPath.Clear();
             _foundPath.AddRange(nodes);
         }
 
@@ -27,11 +28,6 @@ namespace Shafir.FindLogics
         internal void SetDuration(float duration)
         {
             FindDuration = duration;
-        }
-
-        internal void Clear()
-        {
-            _foundPath.Clear();
         }
     }
 }
