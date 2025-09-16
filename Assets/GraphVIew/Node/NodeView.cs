@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Shafir.MonoPool;
+using TMPro;
 using UnityEngine;
 
 namespace Shafir.GraphViews
@@ -13,11 +14,18 @@ namespace Shafir.GraphViews
         public Vector3 Position => transform.position;
         public IReadOnlyList<EdgeView> Edges => _edges;
 
+        [SerializeField] private TextMeshPro text;
+
         private List<EdgeView> _edges = new();
 
         public void Activate()
         {
             gameObject.SetActive(true);
+        }
+
+        public void SetId(ulong id)
+        {
+            text.text = id.ToString();
         }
 
         public void SetPosition(Vector3 position)
