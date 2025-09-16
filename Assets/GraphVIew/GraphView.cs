@@ -54,6 +54,7 @@ namespace Shafir.GraphViews
             {
                 var nodeView = ShafirMonoPool.Get(nodeViewPrefab, nodesContainer);
                 // по хорошему надо передавать модель во вью и давать ему подписаться
+                nodeView.SetId(modelNode.Id);
                 nodeView.SetPosition(modelNode.Position);
                 _nodeViews.Add(modelNode.Id, nodeView);
             }
