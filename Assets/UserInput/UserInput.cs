@@ -6,6 +6,8 @@ namespace Shafir
     public class UserInput : MonoBehaviour
     {
         public event Action LeftMouseButtonClicked;
+        public event Action CancelButtonPressed;
+        public event Action SwitchModePressed;
         public Vector2 MousePosition => _mousePosition;
 
         private Vector2 _mousePosition;
@@ -17,6 +19,16 @@ namespace Shafir
             if (Input.GetMouseButtonDown(0) == true)
             {
                 LeftMouseButtonClicked?.Invoke();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape) == true)
+            {
+                CancelButtonPressed?.Invoke();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Tab) == true)
+            {
+                SwitchModePressed?.Invoke();
             }
         }
     }

@@ -36,6 +36,16 @@ namespace Shafir.App
             _appContext.MainWindow.StartClicked -= OnStartClicked;
             _appContext.MainWindow.Hide();
             _appContext.UserInput.LeftMouseButtonClicked -= OnLeftMouseButtonClicked;
+
+            if (_startNodeSelected == true)
+            {
+                _appContext.GraphView.Nodes[_startNodeId].ResetOutlineColor();
+            }
+
+            if (_endNodeSelected == true)
+            {
+                _appContext.GraphView.Nodes[_endNodeId].ResetOutlineColor();
+            }
         }
 
         private void OnStartClicked()

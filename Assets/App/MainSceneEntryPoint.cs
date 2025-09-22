@@ -20,6 +20,8 @@ namespace Shafir.App
         private WaitingUserActionState _waitingUserActionState;
         private SearchingPathState _searchingPathState;
         private PathSearchFinishedState _pathSearchFinishedState;
+        private CreateNodesState _createNodesState;
+        private CreateEdgesState _createEdgesState;
         private AppContext _appContext;
 
         private void Start()
