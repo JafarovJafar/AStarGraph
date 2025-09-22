@@ -11,6 +11,9 @@ namespace Shafir.GraphViews
     {
         public GraphModel Model => _currentModel;
 
+        public IReadOnlyDictionary<ulong, NodeView> Nodes => _nodeViews;
+        public IReadOnlyDictionary<ulong, EdgeView> Edges => _edgeViews;
+
         [SerializeField] private NodeView nodeViewPrefab;
         [SerializeField] private EdgeView edgeViewPrefab;
 

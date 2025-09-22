@@ -62,6 +62,14 @@ namespace Shafir.App
             if (hit.transform.TryGetComponent(out NodeView clickedNodeView) == false)
                 return;
 
+            if (_startNodeSelected == false && _endNodeSelected == false)
+            {
+                _appContext.GraphView.Nodes[_startNodeId].ResetOutlineColor();
+                _appContext.GraphView.Nodes[_endNodeId].ResetOutlineColor();
+            }
+
+            clickedNodeView.SetOutlineColor(Color.green);
+
             if (_startNodeSelected == false)
             {
                 _startNodeSelected = true;
@@ -75,6 +83,9 @@ namespace Shafir.App
                 _endNodeId = clickedNodeView.Id;
                 return;
             }
+            
+            _appContext.GraphView.Nodes[_startNodeId].ResetOutlineColor();
+            _appContext.GraphView.Nodes[_endNodeId].ResetOutlineColor();
 
             _startNodeSelected = true;
             _endNodeSelected = false;
