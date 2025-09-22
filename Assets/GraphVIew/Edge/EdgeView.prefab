@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2815317790338483050}
   - component: {fileID: -5942292803636192682}
   - component: {fileID: 5545622096126370713}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EdgeView
   m_TagString: Untagged
   m_Icon: {fileID: 0}

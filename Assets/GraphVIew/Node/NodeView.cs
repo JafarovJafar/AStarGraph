@@ -16,9 +16,13 @@ namespace Shafir.GraphViews
         public ulong Id => _id;
 
         [SerializeField] private TextMeshPro text;
+        [SerializeField] private MeshRenderer renderer;
+        [SerializeField] private Color defaultOutlineColor;
 
         private ulong _id;
         private List<EdgeView> _edges = new();
+
+        private static readonly int BorderColorProperty = Shader.PropertyToID("_BorderColor");
 
         public void Activate()
         {
@@ -39,6 +43,16 @@ namespace Shafir.GraphViews
         public void SetPosition(Vector3 position)
         {
             transform.position = position;
+        }
+
+        public void SetOutlineColor(Color color)
+        {
+            renderer.material.SetColor(BorderColorProperty, color);
+        }
+
+        public void ResetOutlineColor()
+        {
+            SetOutlineColor(defaultOutlineColor);
         }
 
         public void AddEdge(EdgeView edge)
