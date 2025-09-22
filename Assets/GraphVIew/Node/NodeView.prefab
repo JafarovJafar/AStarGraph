@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2815317790338483050}
   - component: {fileID: 4043163493135066177}
   - component: {fileID: 520567980666309179}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NodeView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 247894251100435191}
   - component: {fileID: 2774589521852339030}
   - component: {fileID: 3614957630528347269}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 5737530836127497884}
   - component: {fileID: 8622600853258694517}
   - component: {fileID: 1384837348845649055}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +345,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4372890827418894993}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
