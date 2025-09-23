@@ -6,18 +6,26 @@ namespace Shafir.UI
 {
     public class MainWindow : Window
     {
-        public event Action StartClicked;
+        public event Action SearchModeClicked;
+        public event Action ConstructorModeClicked;
 
-        [SerializeField] private Button startButton;
+        [SerializeField] private Button searchModeButton;
+        [SerializeField] private Button constructorModeButton;
 
         public void Initialize()
         {
-            startButton.onClick.AddListener(OnStartClicked);
+            searchModeButton.onClick.AddListener(OnSearchModeButtonClicked);
+            constructorModeButton.onClick.AddListener(OnConstructorModeButtonClicked);
         }
 
-        private void OnStartClicked()
+        private void OnSearchModeButtonClicked()
         {
-            StartClicked?.Invoke();
+            SearchModeClicked?.Invoke();
+        }
+
+        private void OnConstructorModeButtonClicked()
+        {
+            ConstructorModeClicked?.Invoke();
         }
     }
 }

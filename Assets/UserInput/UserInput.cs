@@ -7,7 +7,8 @@ namespace Shafir
     {
         public event Action LeftMouseButtonClicked;
         public event Action CancelButtonPressed;
-        public event Action SwitchModePressed;
+        public event Action SelectMode1Pressed;
+        public event Action SelectMode2Pressed;
         public Vector2 MousePosition => _mousePosition;
 
         private Vector2 _mousePosition;
@@ -26,9 +27,14 @@ namespace Shafir
                 CancelButtonPressed?.Invoke();
             }
 
-            if (Input.GetKeyDown(KeyCode.Tab) == true)
+            if (Input.GetKeyDown(KeyCode.Alpha1) == true)
             {
-                SwitchModePressed?.Invoke();
+                SelectMode1Pressed?.Invoke();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha2) == true)
+            {
+                SelectMode2Pressed?.Invoke();
             }
         }
     }

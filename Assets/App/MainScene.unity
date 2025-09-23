@@ -800,6 +800,64 @@ MonoBehaviour:
   mainWindow: {fileID: 2869674147087573794}
   loadingWindow: {fileID: 3678641220344911610}
   outputWindow: {fileID: 1782614802}
+  legendWindow: {fileID: 1024977042}
+--- !u!1001 &1024977040
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1907327457}
+    m_Modifications:
+    - target: {fileID: 668554300244885769, guid: 8b4423f8793e3bd4580a13991fc0178f, type: 3}
+      propertyPath: m_Name
+      value: LegendWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 668554300244885769, guid: 8b4423f8793e3bd4580a13991fc0178f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841158522785508144, guid: 8b4423f8793e3bd4580a13991fc0178f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841158522785508144, guid: 8b4423f8793e3bd4580a13991fc0178f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841158522785508144, guid: 8b4423f8793e3bd4580a13991fc0178f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841158522785508144, guid: 8b4423f8793e3bd4580a13991fc0178f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841158522785508144, guid: 8b4423f8793e3bd4580a13991fc0178f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8b4423f8793e3bd4580a13991fc0178f, type: 3}
+--- !u!224 &1024977041 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3841158522785508144, guid: 8b4423f8793e3bd4580a13991fc0178f, type: 3}
+  m_PrefabInstance: {fileID: 1024977040}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1024977042 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5547209997973431776, guid: 8b4423f8793e3bd4580a13991fc0178f, type: 3}
+  m_PrefabInstance: {fileID: 1024977040}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dff25f4590c54b238490da04e23b741a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Shafir.UI::Shafir.UI.LegendWindow
 --- !u!1 &1064728730
 GameObject:
   m_ObjectHideFlags: 0
@@ -1216,6 +1274,7 @@ RectTransform:
   - {fileID: 1349882763}
   - {fileID: 1943812440}
   - {fileID: 1782614801}
+  - {fileID: 1024977041}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

@@ -1,0 +1,45 @@
+using Shafir.FSM;
+
+namespace Shafir.App
+{
+    public class ConstructorState : IState
+    {
+        private AppContext _appContext;
+
+        private CreateNodesState _createNodesState;
+        private CreateEdgesState _createEdgesState;
+        private SimpleStateMachine _stateMachine;
+
+        public ConstructorState(AppContext appContext)
+        {
+            _appContext = appContext;
+
+            _createNodesState = new CreateNodesState(_appContext);
+            _createEdgesState = new CreateEdgesState(_appContext);
+        }
+
+        public void Enter()
+        {
+            _appContext.UserInput.SelectMode1Pressed += OnSelectMode1Pressed;
+            _appContext.UserInput.SelectMode2Pressed += OnSelectMode2Pressed;
+
+            _stateMachine.ChangeState(_createNodesState);
+        }
+
+        public void Exit()
+        {
+            _appContext.UserInput.SelectMode1Pressed -= OnSelectMode1Pressed;
+            _appContext.UserInput.SelectMode2Pressed -= OnSelectMode2Pressed;
+
+            _stateMachine.CurrentState.Exit();
+        }
+
+        private void OnSelectMode1Pressed()
+        {
+        }
+
+        private void OnSelectMode2Pressed()
+        {
+        }
+    }
+}

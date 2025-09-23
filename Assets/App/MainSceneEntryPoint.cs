@@ -15,21 +15,25 @@ namespace Shafir.App
         [SerializeField] private MainWindow mainWindow;
         [SerializeField] private LoadingWindow loadingWindow;
         [SerializeField] private OutputWindow outputWindow;
+        [SerializeField] private LegendWindow legendWindow;
 
         private BootState _bootState;
+        private IdleState _idleState;
         private WaitingUserActionState _waitingUserActionState;
         private SearchingPathState _searchingPathState;
         private PathSearchFinishedState _pathSearchFinishedState;
-        private CreateNodesState _createNodesState;
-        private CreateEdgesState _createEdgesState;
+        private ConstructorState _constructorState;
         private AppContext _appContext;
+
+        private AppWorkflow _workflow;
 
         private void Start()
         {
             InitStates();
             InitUI();
 
-            _appContext.AppStateMachine.ChangeState(_bootState);
+            _workflow = new AppWorkflow(_appContext);
+            _workflow.Start();
         }
 
         private void InitStates()
@@ -47,9 +51,12 @@ namespace Shafir.App
             _searchingPathState = new(_appContext);
             _pathSearchFinishedState = new(_appContext);
 
+            _appContext.BootState = _bootState;
+            _appContext.IdleState = _idleState;
             _appContext.WaitingUserActionState = _waitingUserActionState;
             _appContext.SearchingPathState = _searchingPathState;
             _appContext.PathSearchFinishedState = _pathSearchFinishedState;
+            _appContext.ConstructorState = _constructorState;
         }
 
         private void InitUI()
@@ -59,8 +66,7 @@ namespace Shafir.App
             _appContext.MainWindow = mainWindow;
             _appContext.LoadingWindow = loadingWindow;
             _appContext.OutputWindow = outputWindow;
-
-            _appContext.OutputWindow.Show();
+            _appContext.LegendWindow = legendWindow;
         }
     }
 }
