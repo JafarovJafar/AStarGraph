@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,11 +13,35 @@ namespace Shafir.GraphViews
     /// </remarks>
     public class GraphModel
     {
+        public event Action<ulong> NodeAdded;
+        public event Action<ulong> NodeRemoved;
+
+        public event Action<ulong> EdgeAdded;
+        public event Action<ulong> EdgeRemoved;
+
         public IReadOnlyDictionary<ulong, NodeModel> Nodes => _nodes;
         public IReadOnlyDictionary<ulong, EdgeModel> Edges => _edges;
 
         private Dictionary<ulong, NodeModel> _nodes = new();
         private Dictionary<ulong, EdgeModel> _edges = new();
+
+        public void AddNode(ulong nodeId, Vector3 nodePosition)
+        {
+            var nodeModel = new NodeModel(nodeId, nodePosition);
+            _nodes.Add(nodeId, nodeModel);
+
+            NodeAdded?.Invoke(nodeId);
+        }
+
+        public void RemoveNode(ulong nodeId)
+        {
+            if (_nodes.TryGetValue(nodeId, out var node) == false)
+                return;
+
+            node.ClearEdges();
+
+            NodeRemoved?.Invoke(nodeId);
+        }
 
         public void AddEdge
         (
@@ -31,6 +56,8 @@ namespace Shafir.GraphViews
             startNode.AddEdge(newEdge);
             endNode.AddEdge(newEdge);
             _edges.Add(edgeId, newEdge);
+
+            EdgeAdded?.Invoke(edgeId);
         }
 
         public void RemoveEdge(ulong edgeId)
@@ -39,6 +66,8 @@ namespace Shafir.GraphViews
             RemoveEdgeFromNode(edge, edge.StartNode);
             RemoveEdgeFromNode(edge, edge.EndNode);
             _edges.Remove(edgeId);
+
+            EdgeRemoved?.Invoke(edgeId);
         }
 
         private NodeModel CreateOrPickNode(ulong id, Vector3 pos)
