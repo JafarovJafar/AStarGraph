@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Shafir.FindLogics
 {
@@ -13,6 +14,12 @@ namespace Shafir.FindLogics
         public override void Find(Graph graph, ulong startNodeId, ulong endNodeId, Action<FindOutput> finished)
         {
             var startTime = DateTime.Now;
+
+            int counter = int.MaxValue;
+            while (counter > 0)
+            {
+                counter--;
+            }
 
             var nodes = graph.Nodes;
 

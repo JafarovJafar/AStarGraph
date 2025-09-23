@@ -31,6 +31,11 @@ namespace Shafir
             _fillCoroutine = StartCoroutine(FillCoroutine());
         }
 
+        public void Clear()
+        {
+            lineRenderer.positionCount = 0;
+        }
+
         private IEnumerator FillCoroutine()
         {
             var t = 0f;

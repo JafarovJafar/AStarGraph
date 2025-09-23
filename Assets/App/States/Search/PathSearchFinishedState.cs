@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Shafir.FSM;
 using UnityEngine;
@@ -9,6 +10,8 @@ namespace Shafir.App
     /// </summary>
     public class PathSearchFinishedState : IState
     {
+        public event Action PathDrawn;
+
         private AppContext _appContext;
 
         public PathSearchFinishedState(AppContext appContext)
@@ -27,12 +30,13 @@ namespace Shafir.App
                 var nodePosition = _appContext.GraphView.Model.Nodes[nodeId].Position;
                 nodesPositions.Add(nodePosition);
             }
+
             _appContext.PathDrawer.SetPoints(nodesPositions);
 
             var duration = output.FindDuration;
             _appContext.OutputWindow.SetTime(duration);
 
-            _appContext.AppStateMachine.ChangeState(_appContext.WaitingUserActionState);
+            PathDrawn?.Invoke();
         }
 
         public void Exit()
