@@ -1,3 +1,5 @@
+using Shafir.GraphViews;
+
 namespace Shafir.App
 {
     /// <summary>
@@ -14,6 +16,9 @@ namespace Shafir.App
 
         public void Start()
         {
+            var graphModel = new GraphModel();
+            _appContext.GraphView.SetModel(graphModel);
+
             _appContext.BootState.Finished += OnBootFinished;
             _appContext.IdleState.SearchModeRequested += OnSearchModeRequested;
             _appContext.IdleState.ConstructorRequested += OnConstructorModeRequested;

@@ -12,16 +12,16 @@ namespace Shafir.App
     {
         public event Action SearchStartRequested;
 
-        private AppContext _appContext;
+        private readonly AppContext _appContext;
+        private readonly SearchContext _searchContext;
 
         private bool _startNodeSelected;
         private ulong _startNodeId;
-        private bool _endNodeSelected;
-        private ulong _endNodeId;
 
-        public WaitingUserActionState(AppContext appContext)
+        public WaitingUserActionState(AppContext appContext, SearchContext searchContext)
         {
             _appContext = appContext;
+            _searchContext = searchContext;
         }
 
         public void Enter()
@@ -29,7 +29,6 @@ namespace Shafir.App
             _appContext.UserInput.LeftMouseButtonClicked += OnLeftMouseButtonClicked;
 
             _startNodeSelected = false;
-            _endNodeSelected = false;
         }
 
         public void Exit()
@@ -39,11 +38,6 @@ namespace Shafir.App
             if (_startNodeSelected == true)
             {
                 _appContext.GraphView.Nodes[_startNodeId].ResetOutlineColor();
-            }
-
-            if (_endNodeSelected == true)
-            {
-                _appContext.GraphView.Nodes[_endNodeId].ResetOutlineColor();
             }
         }
 
@@ -58,12 +52,6 @@ namespace Shafir.App
             if (hit.transform.TryGetComponent(out NodeView clickedNodeView) == false)
                 return;
 
-            if (_startNodeSelected == false && _endNodeSelected == false)
-            {
-                _appContext.GraphView.Nodes[_startNodeId].ResetOutlineColor();
-                _appContext.GraphView.Nodes[_endNodeId].ResetOutlineColor();
-            }
-
             clickedNodeView.SetOutlineColor(Color.green);
 
             if (_startNodeSelected == false)
@@ -73,23 +61,10 @@ namespace Shafir.App
                 return;
             }
 
-            if (_endNodeSelected == false)
-            {
-                _endNodeSelected = true;
-                _endNodeId = clickedNodeView.Id;
+            _searchContext.StartNodeId = _startNodeId;
+            _searchContext.EndNodeId = clickedNodeView.Id;
 
-                _appContext.StartNodeId = _startNodeId;
-                _appContext.EndNodeId = _endNodeId;
-                SearchStartRequested?.Invoke();
-                return;
-            }
-
-            _appContext.GraphView.Nodes[_startNodeId].ResetOutlineColor();
-            _appContext.GraphView.Nodes[_endNodeId].ResetOutlineColor();
-
-            _startNodeSelected = true;
-            _endNodeSelected = false;
-            _startNodeId = clickedNodeView.Id;
+            SearchStartRequested?.Invoke();
         }
     }
 }

@@ -25,8 +25,5 @@ namespace Shafir.App
         public LoadingWindow LoadingWindow;
         public OutputWindow OutputWindow;
         public LegendWindow LegendWindow;
-
-        public ulong StartNodeId;
-        public ulong EndNodeId;
     }
 }
