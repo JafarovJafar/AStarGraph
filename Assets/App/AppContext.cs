@@ -9,11 +9,9 @@ namespace Shafir.App
     {
         public SimpleStateMachine AppStateMachine;
 
-        public BootState BootState; 
+        public BootState BootState;
         public IdleState IdleState;
-        public WaitingUserActionState WaitingUserActionState;
-        public SearchingPathState SearchingPathState;
-        public PathSearchFinishedState PathSearchFinishedState;
+        public SearchState SearchState;
         public ConstructorState ConstructorState;
 
         public UserInput UserInput;
@@ -27,7 +25,7 @@ namespace Shafir.App
         public LoadingWindow LoadingWindow;
         public OutputWindow OutputWindow;
         public LegendWindow LegendWindow;
-        
+
         public ulong StartNodeId;
         public ulong EndNodeId;
     }

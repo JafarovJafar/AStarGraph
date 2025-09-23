@@ -17,12 +17,6 @@ namespace Shafir.App
         [SerializeField] private OutputWindow outputWindow;
         [SerializeField] private LegendWindow legendWindow;
 
-        private BootState _bootState;
-        private IdleState _idleState;
-        private WaitingUserActionState _waitingUserActionState;
-        private SearchingPathState _searchingPathState;
-        private PathSearchFinishedState _pathSearchFinishedState;
-        private ConstructorState _constructorState;
         private AppContext _appContext;
 
         private AppWorkflow _workflow;
@@ -46,17 +40,10 @@ namespace Shafir.App
             _appContext.FindLogic = new DijkstraFindLogic();
             _appContext.AppStateMachine = new SimpleStateMachine();
 
-            _bootState = new(_appContext);
-            _waitingUserActionState = new(_appContext);
-            _searchingPathState = new(_appContext);
-            _pathSearchFinishedState = new(_appContext);
-
-            _appContext.BootState = _bootState;
-            _appContext.IdleState = _idleState;
-            _appContext.WaitingUserActionState = _waitingUserActionState;
-            _appContext.SearchingPathState = _searchingPathState;
-            _appContext.PathSearchFinishedState = _pathSearchFinishedState;
-            _appContext.ConstructorState = _constructorState;
+            _appContext.BootState = new BootState(_appContext);
+            _appContext.IdleState = new IdleState(_appContext);
+            _appContext.SearchState = new SearchState(_appContext);
+            _appContext.ConstructorState = new ConstructorState(_appContext);
         }
 
         private void InitUI()

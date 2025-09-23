@@ -17,24 +17,41 @@ namespace Shafir.App
             _appContext.BootState.Finished += OnBootFinished;
             _appContext.IdleState.SearchModeRequested += OnSearchModeRequested;
             _appContext.IdleState.ConstructorRequested += OnConstructorModeRequested;
-
+            _appContext.SearchState.ExitRequested += OnSearchExitRequested;
+            _appContext.ConstructorState.ExitRequested += OnConstructorExitRequested;
 
             _appContext.AppStateMachine.ChangeState(_appContext.BootState);
         }
 
         public void Stop()
         {
+            _appContext.AppStateMachine.CurrentState.Exit();
 
+            _appContext.BootState.Finished -= OnBootFinished;
+            _appContext.IdleState.SearchModeRequested -= OnSearchModeRequested;
+            _appContext.IdleState.ConstructorRequested -= OnConstructorModeRequested;
+            _appContext.SearchState.ExitRequested -= OnSearchExitRequested;
+            _appContext.ConstructorState.ExitRequested -= OnConstructorExitRequested;
         }
 
         private void OnBootFinished()
         {
-            _appContext.AppStateMachine.ChangeState(_appContext.WaitingUserActionState);
+            _appContext.AppStateMachine.ChangeState(_appContext.IdleState);
         }
 
         private void OnSearchModeRequested()
         {
-            _appContext.AppStateMachine.ChangeState(_appContext.SearchingPathState);
+            _appContext.AppStateMachine.ChangeState(_appContext.SearchState);
+        }
+
+        private void OnSearchExitRequested()
+        {
+            _appContext.AppStateMachine.ChangeState(_appContext.IdleState);
+        }
+
+        private void OnConstructorExitRequested()
+        {
+            _appContext.AppStateMachine.ChangeState(_appContext.IdleState);
         }
 
         private void OnConstructorModeRequested()

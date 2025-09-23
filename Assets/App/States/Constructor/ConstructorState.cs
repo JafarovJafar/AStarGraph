@@ -1,9 +1,12 @@
+using System;
 using Shafir.FSM;
 
 namespace Shafir.App
 {
     public class ConstructorState : IState
     {
+        public event Action ExitRequested;
+
         private AppContext _appContext;
 
         private CreateNodesState _createNodesState;
@@ -16,12 +19,14 @@ namespace Shafir.App
 
             _createNodesState = new CreateNodesState(_appContext);
             _createEdgesState = new CreateEdgesState(_appContext);
+            _stateMachine = new SimpleStateMachine();
         }
 
         public void Enter()
         {
             _appContext.UserInput.SelectMode1Pressed += OnSelectMode1Pressed;
             _appContext.UserInput.SelectMode2Pressed += OnSelectMode2Pressed;
+            _appContext.UserInput.CancelButtonPressed += OnCancelPressed;
 
             _stateMachine.ChangeState(_createNodesState);
         }
@@ -30,16 +35,24 @@ namespace Shafir.App
         {
             _appContext.UserInput.SelectMode1Pressed -= OnSelectMode1Pressed;
             _appContext.UserInput.SelectMode2Pressed -= OnSelectMode2Pressed;
+            _appContext.UserInput.CancelButtonPressed -= OnCancelPressed;
 
             _stateMachine.CurrentState.Exit();
         }
 
         private void OnSelectMode1Pressed()
         {
+            _stateMachine.ChangeState(_createNodesState);
         }
 
         private void OnSelectMode2Pressed()
         {
+            _stateMachine.ChangeState(_createEdgesState);
+        }
+
+        private void OnCancelPressed()
+        {
+            ExitRequested?.Invoke();
         }
     }
 }
