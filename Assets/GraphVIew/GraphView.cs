@@ -29,6 +29,11 @@ namespace Shafir.GraphViews
         {
             if (_currentModel != null)
             {
+                _currentModel.NodeAdded -= OnNodeAdded;
+                _currentModel.NodeRemoved -= OnNodeRemoved;
+                _currentModel.EdgeAdded -= OnEdgeAdded;
+                _currentModel.EdgeRemoved -= OnEdgeRemoved;
+
                 foreach (var edgeView in _edgeViews.Values)
                 {
                     var startNode = edgeView.StartNode;
@@ -55,29 +60,70 @@ namespace Shafir.GraphViews
             var modelNodes = model.Nodes.Values;
             foreach (var modelNode in modelNodes)
             {
-                var nodeView = ShafirMonoPool.Get(nodeViewPrefab, nodesContainer);
-                // по хорошему надо передавать модель во вью и давать ему подписаться
-                nodeView.SetName($"Node_{modelNode.Id}");
-                nodeView.SetId(modelNode.Id);
-                nodeView.SetPosition(modelNode.Position);
-                _nodeViews.Add(modelNode.Id, nodeView);
+                CreateNode(modelNode);
             }
 
             var modelEdges = model.Edges.Values;
             foreach (var modelEdge in modelEdges)
             {
-                var isStartNodeFound = _nodeViews.TryGetValue(modelEdge.StartNode.Id, out var startNodeView);
-                var isEndNodeFound = _nodeViews.TryGetValue(modelEdge.EndNode.Id, out var endNodeView);
-
-                if (isStartNodeFound == false || isEndNodeFound == false)
-                {
-                    Debug.LogError($"Одна из вершин ребра {modelEdge.Id} не найдена. Пропускаю создание вью ребра");
-                    continue;
-                }
-
-                var edgeView = ShafirMonoPool.Get(edgeViewPrefab, edgesContainer);
-                edgeView.SetNodes(startNodeView, endNodeView);
+                CreateEdge(modelEdge);
             }
+
+            _currentModel.NodeAdded += OnNodeAdded;
+            _currentModel.NodeRemoved += OnNodeRemoved;
+            _currentModel.EdgeAdded += OnEdgeAdded;
+            _currentModel.EdgeRemoved += OnEdgeRemoved;
+        }
+
+        private void OnNodeAdded(ulong nodeId)
+        {
+            var nodeModel = _currentModel.Nodes[nodeId];
+            CreateNode(nodeModel);
+        }
+
+        private void OnNodeRemoved(ulong nodeId)
+        {
+            var view = _nodeViews[nodeId];
+            ShafirMonoPool.Return(view);
+            _nodeViews.Remove(nodeId);
+        }
+
+        private void OnEdgeAdded(ulong edgeId)
+        {
+            var edgeModel = _currentModel.Edges[edgeId];
+            CreateEdge(edgeModel);
+        }
+
+        private void OnEdgeRemoved(ulong edgeId)
+        {
+            var edge = _edgeViews[edgeId];
+            ShafirMonoPool.Return(edge);
+            _edgeViews.Remove(edgeId);
+        }
+
+        private void CreateNode(NodeModel nodeModel)
+        {
+            var nodeView = ShafirMonoPool.Get(nodeViewPrefab, nodesContainer);
+            // по хорошему надо передавать модель во вью и давать ему подписаться
+            nodeView.SetName($"Node_{nodeModel.Id}");
+            nodeView.SetId(nodeModel.Id);
+            nodeView.SetPosition(nodeModel.Position);
+            _nodeViews.Add(nodeModel.Id, nodeView);
+        }
+
+        private void CreateEdge(EdgeModel edgeModel)
+        {
+            var isStartNodeFound = _nodeViews.TryGetValue(edgeModel.StartNode.Id, out var startNodeView);
+            var isEndNodeFound = _nodeViews.TryGetValue(edgeModel.EndNode.Id, out var endNodeView);
+
+            if (isStartNodeFound == false || isEndNodeFound == false)
+            {
+                Debug.LogError($"Одна из вершин ребра {edgeModel.Id} не найдена. Пропускаю создание вью ребра");
+                return;
+            }
+
+            var edgeView = ShafirMonoPool.Get(edgeViewPrefab, edgesContainer);
+            edgeView.SetNodes(startNodeView, endNodeView);
         }
     }
 }

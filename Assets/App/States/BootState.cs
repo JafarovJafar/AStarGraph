@@ -1,3 +1,4 @@
+using System;
 using Shafir.FSM;
 
 namespace Shafir.App
@@ -7,6 +8,8 @@ namespace Shafir.App
     /// </summary>
     public class BootState : IState
     {
+        public event Action Finished;
+        
         private AppContext _appContext;
 
         public BootState(AppContext appContext)
@@ -16,7 +19,7 @@ namespace Shafir.App
 
         public void Enter()
         {
-            _appContext.AppStateMachine.ChangeState(_appContext.WaitingUserActionState);
+            Finished?.Invoke();
         }
 
         public void Exit()

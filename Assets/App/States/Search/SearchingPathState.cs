@@ -1,3 +1,4 @@
+using System;
 using Shafir.FindLogics;
 using Shafir.FSM;
 using Shafir.GraphViews;
@@ -9,6 +10,8 @@ namespace Shafir.App
     /// </summary>
     public class SearchingPathState : IState
     {
+        public event Action Finished;
+
         private AppContext _appContext;
 
         public SearchingPathState(AppContext appContext)
@@ -21,10 +24,12 @@ namespace Shafir.App
             _appContext.LoadingWindow.Show();
 
             var searchModel = GetFindGraph(_appContext.GraphView.Model);
-            _appContext.FindLogic.Find(searchModel, _appContext.StartNodeId, _appContext.EndNodeId, output =>
-            {
-                _appContext.AppStateMachine.ChangeState(_appContext.PathSearchFinishedState);
-            });
+            _appContext.FindLogic.Find(searchModel, _appContext.StartNodeId, _appContext.EndNodeId, OnSearchFinished);
+        }
+
+        private void OnSearchFinished(FindOutput findOutput)
+        {
+            Finished?.Invoke();
         }
 
         private Graph GetFindGraph(GraphModel model)

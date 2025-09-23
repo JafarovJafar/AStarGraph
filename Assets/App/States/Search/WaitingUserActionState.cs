@@ -1,3 +1,4 @@
+using System;
 using Shafir.FSM;
 using Shafir.GraphViews;
 using UnityEngine;
@@ -9,6 +10,8 @@ namespace Shafir.App
     /// </summary>
     public class WaitingUserActionState : IState
     {
+        public event Action SearchStartRequested;
+
         private AppContext _appContext;
 
         private bool _startNodeSelected;
@@ -23,8 +26,6 @@ namespace Shafir.App
 
         public void Enter()
         {
-            _appContext.MainWindow.Show();
-            _appContext.MainWindow.StartClicked += OnStartClicked;
             _appContext.UserInput.LeftMouseButtonClicked += OnLeftMouseButtonClicked;
 
             _startNodeSelected = false;
@@ -33,22 +34,17 @@ namespace Shafir.App
 
         public void Exit()
         {
-            _appContext.MainWindow.StartClicked -= OnStartClicked;
-            _appContext.MainWindow.Hide();
             _appContext.UserInput.LeftMouseButtonClicked -= OnLeftMouseButtonClicked;
-        }
 
-        private void OnStartClicked()
-        {
-            if (_startNodeSelected == false || _endNodeSelected == false)
+            if (_startNodeSelected == true)
             {
-                Debug.LogError("Ноды не выбраны");
-                return;
+                _appContext.GraphView.Nodes[_startNodeId].ResetOutlineColor();
             }
 
-            _appContext.StartNodeId = _startNodeId;
-            _appContext.EndNodeId = _endNodeId;
-            _appContext.AppStateMachine.ChangeState(_appContext.SearchingPathState);
+            if (_endNodeSelected == true)
+            {
+                _appContext.GraphView.Nodes[_endNodeId].ResetOutlineColor();
+            }
         }
 
         private void OnLeftMouseButtonClicked()
@@ -81,9 +77,13 @@ namespace Shafir.App
             {
                 _endNodeSelected = true;
                 _endNodeId = clickedNodeView.Id;
+
+                _appContext.StartNodeId = _startNodeId;
+                _appContext.EndNodeId = _endNodeId;
+                SearchStartRequested?.Invoke();
                 return;
             }
-            
+
             _appContext.GraphView.Nodes[_startNodeId].ResetOutlineColor();
             _appContext.GraphView.Nodes[_endNodeId].ResetOutlineColor();
 
