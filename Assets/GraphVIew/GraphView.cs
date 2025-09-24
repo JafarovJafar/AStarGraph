@@ -84,6 +84,12 @@ namespace Shafir.GraphViews
         private void OnNodeRemoved(ulong nodeId)
         {
             var view = _nodeViews[nodeId];
+
+            foreach (var edgeView in view.Edges)
+            {
+                ShafirMonoPool.Return(edgeView);
+            }
+
             ShafirMonoPool.Return(view);
             _nodeViews.Remove(nodeId);
         }
@@ -123,6 +129,7 @@ namespace Shafir.GraphViews
             }
 
             var edgeView = ShafirMonoPool.Get(edgeViewPrefab, edgesContainer);
+            edgeView.SetId(edgeModel.Id);
             edgeView.SetNodes(startNodeView, endNodeView);
         }
     }

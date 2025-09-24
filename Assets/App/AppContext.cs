@@ -1,6 +1,7 @@
 using Shafir.FindLogics;
 using Shafir.FSM;
 using Shafir.GraphViews;
+using Shafir.RaycastSystem;
 using Shafir.UI;
 
 namespace Shafir.App
@@ -18,6 +19,7 @@ namespace Shafir.App
         public MainCamera MainCamera;
         public GraphView GraphView;
         public PathDrawer PathDrawer;
+        public Raycaster Raycaster;
 
         public FindLogic FindLogic;
 

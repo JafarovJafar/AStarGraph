@@ -6,14 +6,18 @@ namespace Shafir.GraphViews
     /// <summary>
     /// Вью для ребра графа
     /// </summary>
-    public class EdgeView : MonoBehaviour, IPoolable
+    public class EdgeView : EntityView, IPoolable
     {
         public NodeView StartNode => _startNode;
         public NodeView EndNode => _endNode;
 
         public bool IsActive => gameObject.activeSelf;
 
+        public ulong Id => _id;
+
         [SerializeField] private LineRenderer lineRenderer;
+
+        private ulong _id;
 
         private NodeView _startNode;
         private NodeView _endNode;
@@ -21,6 +25,11 @@ namespace Shafir.GraphViews
         private Vector3[] _linePoints;
 
         private bool _isInitialized;
+
+        public void SetId(ulong id)
+        {
+            _id = id;
+        }
 
         public void SetNodes(NodeView startNode, NodeView endNode)
         {

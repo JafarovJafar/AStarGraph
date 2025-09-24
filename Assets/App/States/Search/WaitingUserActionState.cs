@@ -44,13 +44,12 @@ namespace Shafir.App
         private void OnLeftMouseButtonClicked()
         {
             var camera = _appContext.MainCamera.Camera;
-            var ray = camera.ScreenPointToRay(_appContext.UserInput.MousePosition);
+            var mousePosition = _appContext.UserInput.MousePosition;
 
-            if (Physics.Raycast(ray, out RaycastHit hit) == false)
+            if (_appContext.Raycaster.TryRaycast(camera, mousePosition, out NodeView clickedNodeView) == false)
+            {
                 return;
-
-            if (hit.transform.TryGetComponent(out NodeView clickedNodeView) == false)
-                return;
+            }
 
             clickedNodeView.SetOutlineColor(Color.green);
 

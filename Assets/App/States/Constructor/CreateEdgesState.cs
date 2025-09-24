@@ -56,16 +56,10 @@ namespace Shafir.App
         private void OnLeftMouseButtonClicked()
         {
             var camera = _appContext.MainCamera.Camera;
-            var ray = camera.ScreenPointToRay(_appContext.UserInput.MousePosition);
+            var mousePos = _appContext.UserInput.MousePosition;
 
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, float.MaxValue, _layerMask) == false)
+            if (_appContext.Raycaster.TryRaycast(camera, mousePos, _layerMask, out NodeView clickedNodeView) == false)
                 return;
-
-            if (hitInfo.transform.TryGetComponent(out NodeView clickedNodeView) == false)
-            {
-                Debug.LogWarning($"Не удалось получить {nameof(NodeView)}");
-                return;
-            }
 
             if (_wasFirstNodeClicked == false)
             {
