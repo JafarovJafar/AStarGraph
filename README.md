@@ -53,7 +53,7 @@
 
 ## Технические детали
 
-- Движок:** Unity 6000.2.2f1
+- Движок: Unity 6000.2.2f1
 - Самописные решения:
 	- shafir-fsm (https://github.com/JafarovJafar/shafir-fsm.git)
 	- shafir-monopool (https://github.com/JafarovJafar/shafir-monopool.git)
