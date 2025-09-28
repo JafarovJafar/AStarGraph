@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Shafir.GraphViews
+namespace Shafir.GraphData
 {
     /// <summary>
     /// Модель графа

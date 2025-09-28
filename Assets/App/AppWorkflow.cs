@@ -1,4 +1,4 @@
-using Shafir.GraphViews;
+using Shafir.GraphData;
 
 namespace Shafir.App
 {

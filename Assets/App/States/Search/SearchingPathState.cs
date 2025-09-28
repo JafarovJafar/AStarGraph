@@ -1,7 +1,7 @@
 using System;
 using Shafir.FindLogics;
 using Shafir.FSM;
-using Shafir.GraphViews;
+using Shafir.GraphData;
 
 namespace Shafir.App
 {

@@ -1,4 +1,4 @@
-namespace Shafir.GraphViews
+namespace Shafir.GraphData
 {
     public class EdgeModel
     {
