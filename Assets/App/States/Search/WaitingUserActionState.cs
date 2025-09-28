@@ -15,8 +15,10 @@ namespace Shafir.App
         private readonly AppContext _appContext;
         private readonly SearchContext _searchContext;
 
-        private bool _startNodeSelected;
+        private bool _isStartNodeSelected;
         private ulong _startNodeId;
+        private bool _isEndNodeSelected;
+        private ulong _endNodeId;
 
         public WaitingUserActionState(AppContext appContext, SearchContext searchContext)
         {
@@ -28,16 +30,22 @@ namespace Shafir.App
         {
             _appContext.UserInput.LeftMouseButtonClicked += OnLeftMouseButtonClicked;
 
-            _startNodeSelected = false;
+            _isStartNodeSelected = false;
+            _isEndNodeSelected = false;
         }
 
         public void Exit()
         {
             _appContext.UserInput.LeftMouseButtonClicked -= OnLeftMouseButtonClicked;
 
-            if (_startNodeSelected == true)
+            if (_isStartNodeSelected == true)
             {
                 _appContext.GraphView.Nodes[_startNodeId].ResetOutlineColor();
+            }
+
+            if (_isEndNodeSelected == true)
+            {
+                _appContext.GraphView.Nodes[_endNodeId].ResetOutlineColor();
             }
         }
 
@@ -53,15 +61,18 @@ namespace Shafir.App
 
             clickedNodeView.SetOutlineColor(Color.green);
 
-            if (_startNodeSelected == false)
+            if (_isStartNodeSelected == false)
             {
-                _startNodeSelected = true;
+                _isStartNodeSelected = true;
                 _startNodeId = clickedNodeView.Id;
                 return;
             }
 
+            _endNodeId = clickedNodeView.Id;
+
+            _isEndNodeSelected = true;
             _searchContext.StartNodeId = _startNodeId;
-            _searchContext.EndNodeId = clickedNodeView.Id;
+            _searchContext.EndNodeId = _endNodeId;
 
             SearchStartRequested?.Invoke();
         }
