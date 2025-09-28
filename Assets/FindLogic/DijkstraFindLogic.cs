@@ -15,12 +15,6 @@ namespace Shafir.FindLogics
         {
             var startTime = DateTime.Now;
 
-            int counter = int.MaxValue;
-            while (counter > 0)
-            {
-                counter--;
-            }
-
             var nodes = graph.Nodes;
 
             // подготовка графа к поиску
