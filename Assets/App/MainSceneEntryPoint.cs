@@ -1,6 +1,7 @@
 using Shafir.FindLogics;
 using Shafir.FSM;
 using Shafir.GraphViews;
+using Shafir.RaycastSystem;
 using Shafir.UI;
 using UnityEngine;
 
@@ -37,6 +38,7 @@ namespace Shafir.App
             _appContext.MainCamera = mainCamera;
             _appContext.GraphView = graphView;
             _appContext.PathDrawer = pathDrawer;
+            _appContext.Raycaster = new Raycaster();
             _appContext.FindLogic = new DijkstraFindLogic();
             _appContext.AppStateMachine = new SimpleStateMachine();
 

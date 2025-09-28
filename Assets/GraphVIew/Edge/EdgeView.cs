@@ -6,14 +6,19 @@ namespace Shafir.GraphViews
     /// <summary>
     /// Вью для ребра графа
     /// </summary>
-    public class EdgeView : MonoBehaviour, IPoolable
+    public class EdgeView : EntityView, IPoolable
     {
         public NodeView StartNode => _startNode;
         public NodeView EndNode => _endNode;
 
         public bool IsActive => gameObject.activeSelf;
 
+        public ulong Id => _id;
+
+        [SerializeField] private BoxCollider collider;
         [SerializeField] private LineRenderer lineRenderer;
+
+        private ulong _id;
 
         private NodeView _startNode;
         private NodeView _endNode;
@@ -21,6 +26,11 @@ namespace Shafir.GraphViews
         private Vector3[] _linePoints;
 
         private bool _isInitialized;
+
+        public void SetId(ulong id)
+        {
+            _id = id;
+        }
 
         public void SetNodes(NodeView startNode, NodeView endNode)
         {
@@ -32,6 +42,16 @@ namespace Shafir.GraphViews
 
         private void Redraw()
         {
+            var position = (_startNode.Position + _endNode.Position) / 2f;
+            var rotation = Quaternion.LookRotation(_endNode.Position - _startNode.Position, Vector3.up);
+            var length = Vector3.Distance(_startNode.Position, _endNode.Position);
+            var size = collider.size;
+            size.y = lineRenderer.endWidth;
+            size.z = length;
+            collider.transform.position = position;
+            collider.transform.rotation = rotation;
+            collider.size = size;
+
             _linePoints[0] = _startNode.Position;
             _linePoints[1] = _endNode.Position;
             lineRenderer.SetPositions(_linePoints);

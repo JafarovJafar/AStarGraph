@@ -12,11 +12,13 @@ namespace Shafir.App
     {
         public event Action Finished;
 
-        private AppContext _appContext;
+        private readonly AppContext _appContext;
+        private readonly SearchContext _searchContext;
 
-        public SearchingPathState(AppContext appContext)
+        public SearchingPathState(AppContext appContext, SearchContext searchContext)
         {
             _appContext = appContext;
+            _searchContext = searchContext;
         }
 
         public void Enter()
@@ -24,7 +26,9 @@ namespace Shafir.App
             _appContext.LoadingWindow.Show();
 
             var searchModel = GetFindGraph(_appContext.GraphView.Model);
-            _appContext.FindLogic.Find(searchModel, _appContext.StartNodeId, _appContext.EndNodeId, OnSearchFinished);
+            var startNodeId = _searchContext.StartNodeId;
+            var endNodeId = _searchContext.EndNodeId;
+            _appContext.FindLogic.Find(searchModel, startNodeId, endNodeId, OnSearchFinished);
         }
 
         private void OnSearchFinished(FindOutput findOutput)

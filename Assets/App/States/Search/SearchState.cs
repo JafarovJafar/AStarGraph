@@ -8,6 +8,7 @@ namespace Shafir.App
         public event Action ExitRequested;
 
         private readonly AppContext _appContext;
+        private readonly SearchContext _searchContext;
 
         private WaitingUserActionState _waitingUserActionState;
         private SearchingPathState _searchingPathState;
@@ -20,8 +21,10 @@ namespace Shafir.App
         {
             _appContext = appContext;
 
-            _waitingUserActionState = new WaitingUserActionState(_appContext);
-            _searchingPathState = new SearchingPathState(_appContext);
+            _searchContext = new SearchContext();
+
+            _waitingUserActionState = new WaitingUserActionState(_appContext, _searchContext);
+            _searchingPathState = new SearchingPathState(_appContext, _searchContext);
             _pathSearchFinishedState = new PathSearchFinishedState(_appContext); // todo переименовать класс
             _stateMachine = new SimpleStateMachine();
         }

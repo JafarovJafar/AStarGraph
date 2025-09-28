@@ -12,36 +12,38 @@ namespace Shafir.App
     {
         public event Action SearchStartRequested;
 
-        private AppContext _appContext;
+        private readonly AppContext _appContext;
+        private readonly SearchContext _searchContext;
 
-        private bool _startNodeSelected;
+        private bool _isStartNodeSelected;
         private ulong _startNodeId;
-        private bool _endNodeSelected;
+        private bool _isEndNodeSelected;
         private ulong _endNodeId;
 
-        public WaitingUserActionState(AppContext appContext)
+        public WaitingUserActionState(AppContext appContext, SearchContext searchContext)
         {
             _appContext = appContext;
+            _searchContext = searchContext;
         }
 
         public void Enter()
         {
             _appContext.UserInput.LeftMouseButtonClicked += OnLeftMouseButtonClicked;
 
-            _startNodeSelected = false;
-            _endNodeSelected = false;
+            _isStartNodeSelected = false;
+            _isEndNodeSelected = false;
         }
 
         public void Exit()
         {
             _appContext.UserInput.LeftMouseButtonClicked -= OnLeftMouseButtonClicked;
 
-            if (_startNodeSelected == true)
+            if (_isStartNodeSelected == true)
             {
                 _appContext.GraphView.Nodes[_startNodeId].ResetOutlineColor();
             }
 
-            if (_endNodeSelected == true)
+            if (_isEndNodeSelected == true)
             {
                 _appContext.GraphView.Nodes[_endNodeId].ResetOutlineColor();
             }
@@ -50,46 +52,29 @@ namespace Shafir.App
         private void OnLeftMouseButtonClicked()
         {
             var camera = _appContext.MainCamera.Camera;
-            var ray = camera.ScreenPointToRay(_appContext.UserInput.MousePosition);
+            var mousePosition = _appContext.UserInput.MousePosition;
 
-            if (Physics.Raycast(ray, out RaycastHit hit) == false)
-                return;
-
-            if (hit.transform.TryGetComponent(out NodeView clickedNodeView) == false)
-                return;
-
-            if (_startNodeSelected == false && _endNodeSelected == false)
+            if (_appContext.Raycaster.TryRaycast(camera, mousePosition, out NodeView clickedNodeView) == false)
             {
-                _appContext.GraphView.Nodes[_startNodeId].ResetOutlineColor();
-                _appContext.GraphView.Nodes[_endNodeId].ResetOutlineColor();
+                return;
             }
 
             clickedNodeView.SetOutlineColor(Color.green);
 
-            if (_startNodeSelected == false)
+            if (_isStartNodeSelected == false)
             {
-                _startNodeSelected = true;
+                _isStartNodeSelected = true;
                 _startNodeId = clickedNodeView.Id;
                 return;
             }
 
-            if (_endNodeSelected == false)
-            {
-                _endNodeSelected = true;
-                _endNodeId = clickedNodeView.Id;
+            _endNodeId = clickedNodeView.Id;
 
-                _appContext.StartNodeId = _startNodeId;
-                _appContext.EndNodeId = _endNodeId;
-                SearchStartRequested?.Invoke();
-                return;
-            }
+            _isEndNodeSelected = true;
+            _searchContext.StartNodeId = _startNodeId;
+            _searchContext.EndNodeId = _endNodeId;
 
-            _appContext.GraphView.Nodes[_startNodeId].ResetOutlineColor();
-            _appContext.GraphView.Nodes[_endNodeId].ResetOutlineColor();
-
-            _startNodeSelected = true;
-            _endNodeSelected = false;
-            _startNodeId = clickedNodeView.Id;
+            SearchStartRequested?.Invoke();
         }
     }
 }

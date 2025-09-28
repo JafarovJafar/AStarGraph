@@ -8,7 +8,7 @@ namespace Shafir.GraphViews
     /// <summary>
     /// Вью для вершины графа
     /// </summary>
-    public class NodeView : MonoBehaviour, IPoolable
+    public class NodeView : EntityView, IPoolable
     {
         public bool IsActive => gameObject.activeSelf;
         public Vector3 Position => transform.position;
