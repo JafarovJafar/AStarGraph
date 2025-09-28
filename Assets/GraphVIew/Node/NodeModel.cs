@@ -28,15 +28,9 @@ namespace Shafir.GraphViews
             Updated?.Invoke();
         }
 
-        public void RemoveEdge(EdgeModel edge)
+        public void RemoveEdge(ulong edgeId)
         {
-            _edges.Remove(edge.Id);
-            Updated?.Invoke();
-        }
-
-        public void ClearEdges()
-        {
-            _edges.Clear();
+            _edges.Remove(edgeId);
             Updated?.Invoke();
         }
     }

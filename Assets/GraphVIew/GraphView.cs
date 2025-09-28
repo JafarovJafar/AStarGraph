@@ -36,12 +36,6 @@ namespace Shafir.GraphViews
 
                 foreach (var edgeView in _edgeViews.Values)
                 {
-                    var startNode = edgeView.StartNode;
-                    var endNode = edgeView.EndNode;
-
-                    startNode.RemoveEdge(edgeView);
-                    endNode.RemoveEdge(edgeView);
-
                     ShafirMonoPool.Return(edgeView);
                 }
 
@@ -53,6 +47,7 @@ namespace Shafir.GraphViews
                 }
 
                 _nodeViews.Clear();
+                _edgeViews.Clear();
             }
 
             _currentModel = model;
@@ -85,11 +80,6 @@ namespace Shafir.GraphViews
         {
             var view = _nodeViews[nodeId];
 
-            foreach (var edgeView in view.Edges)
-            {
-                ShafirMonoPool.Return(edgeView);
-            }
-
             ShafirMonoPool.Return(view);
             _nodeViews.Remove(nodeId);
         }
@@ -110,27 +100,14 @@ namespace Shafir.GraphViews
         private void CreateNode(NodeModel nodeModel)
         {
             var nodeView = ShafirMonoPool.Get(nodeViewPrefab, nodesContainer);
-            // по хорошему надо передавать модель во вью и давать ему подписаться
-            nodeView.SetName($"Node_{nodeModel.Id}");
-            nodeView.SetId(nodeModel.Id);
-            nodeView.SetPosition(nodeModel.Position);
+            nodeView.SetModel(nodeModel);
             _nodeViews.Add(nodeModel.Id, nodeView);
         }
 
         private void CreateEdge(EdgeModel edgeModel)
         {
-            var isStartNodeFound = _nodeViews.TryGetValue(edgeModel.StartNode.Id, out var startNodeView);
-            var isEndNodeFound = _nodeViews.TryGetValue(edgeModel.EndNode.Id, out var endNodeView);
-
-            if (isStartNodeFound == false || isEndNodeFound == false)
-            {
-                Debug.LogError($"Одна из вершин ребра {edgeModel.Id} не найдена. Пропускаю создание вью ребра");
-                return;
-            }
-
             var edgeView = ShafirMonoPool.Get(edgeViewPrefab, edgesContainer);
-            edgeView.SetId(edgeModel.Id);
-            edgeView.SetNodes(startNodeView, endNodeView);
+            edgeView.SetModel(edgeModel);
             _edgeViews.Add(edgeModel.Id, edgeView);
         }
     }

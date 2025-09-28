@@ -40,6 +40,11 @@ namespace Shafir.App
         {
             var result = new Graph();
 
+            foreach (var node in model.Nodes.Values)
+            {
+                result.AddNode(node.Id);
+            }
+
             foreach (var edge in model.Edges.Values)
             {
                 result.AddEdge(edge.Id, edge.StartNode.Id, edge.EndNode.Id, edge.Cost);

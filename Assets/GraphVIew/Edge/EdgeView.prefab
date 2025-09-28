@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f482734535b847abb9d8822c5f03a24a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Shafir.GraphView::Shafir.GraphViews.EdgeView
-  collider: {fileID: 484696206286118954}
+  clickCollider: {fileID: 484696206286118954}
   lineRenderer: {fileID: 5545622096126370713}
 --- !u!120 &5545622096126370713
 LineRenderer:

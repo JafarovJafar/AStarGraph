@@ -38,7 +38,13 @@ namespace Shafir.GraphViews
             if (_nodes.TryGetValue(nodeId, out var node) == false)
                 return;
 
-            node.ClearEdges();
+            var edges = new List<ulong>(node.Edges.Keys);
+            foreach (var edgeId in edges)
+            {
+                RemoveEdge(edgeId);
+            }
+
+            _nodes.Remove(nodeId);
 
             NodeRemoved?.Invoke(nodeId);
         }
@@ -63,8 +69,8 @@ namespace Shafir.GraphViews
         public void RemoveEdge(ulong edgeId)
         {
             var edge = _edges[edgeId];
-            RemoveEdgeFromNode(edge, edge.StartNode);
-            RemoveEdgeFromNode(edge, edge.EndNode);
+            edge.StartNode.RemoveEdge(edgeId);
+            edge.EndNode.RemoveEdge(edgeId);
             _edges.Remove(edgeId);
 
             EdgeRemoved?.Invoke(edgeId);
@@ -78,13 +84,6 @@ namespace Shafir.GraphViews
             var newNode = new NodeModel(id, pos);
             _nodes.Add(id, newNode);
             return newNode;
-        }
-
-        private void RemoveEdgeFromNode(EdgeModel edge, NodeModel node)
-        {
-            node.RemoveEdge(edge);
-            if (node.Edges.Count == 0)
-                _nodes.Remove(node.Id);
         }
     }
 }

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Shafir.MonoPool;
 using TMPro;
 using UnityEngine;
@@ -12,42 +11,42 @@ namespace Shafir.GraphViews
     {
         public bool IsActive => gameObject.activeSelf;
         public Vector3 Position => transform.position;
-        public IReadOnlyList<EdgeView> Edges => _edges;
-        public ulong Id => _id;
+        public ulong Id => _model.Id;
 
         [SerializeField] private TextMeshPro text;
-        [SerializeField] private MeshRenderer renderer;
+        [SerializeField] private MeshRenderer bodyRenderer;
         [SerializeField] private Color defaultOutlineColor;
 
-        private ulong _id;
-        private List<EdgeView> _edges = new();
-
         private static readonly int BorderColorProperty = Shader.PropertyToID("_BorderColor");
+
+        private NodeModel _model;
 
         public void Activate()
         {
             gameObject.SetActive(true);
         }
 
-        public void SetName(string name)
+        public void DeActivate()
         {
-            gameObject.name = name;
+            gameObject.SetActive(false);
+            ResetOutlineColor();
         }
 
-        public void SetId(ulong id)
+        public void SetModel(NodeModel model)
         {
-            _id = id;
-            text.text = id.ToString();
-        }
+            if (_model != null)
+            {
+                _model.Updated -= OnModelUpdated;
+            }
 
-        public void SetPosition(Vector3 position)
-        {
-            transform.position = position;
+            _model = model;
+            _model.Updated += OnModelUpdated;
+            UpdateByModel();
         }
 
         public void SetOutlineColor(Color color)
         {
-            renderer.material.SetColor(BorderColorProperty, color);
+            bodyRenderer.material.SetColor(BorderColorProperty, color);
         }
 
         public void ResetOutlineColor()
@@ -55,20 +54,16 @@ namespace Shafir.GraphViews
             SetOutlineColor(defaultOutlineColor);
         }
 
-        public void AddEdge(EdgeView edge)
+        private void OnModelUpdated()
         {
-            _edges.Add(edge);
+            UpdateByModel();
         }
 
-        public void RemoveEdge(EdgeView edge)
+        private void UpdateByModel()
         {
-            _edges.Remove(edge);
-        }
-
-        public void DeActivate()
-        {
-            gameObject.SetActive(false);
-            _edges.Clear();
+            gameObject.name = $"Node_{_model.Id}";
+            text.text = _model.Id.ToString();
+            transform.position = _model.Position;
         }
     }
 }

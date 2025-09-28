@@ -8,54 +8,17 @@ namespace Shafir.GraphViews
     /// </summary>
     public class EdgeView : EntityView, IPoolable
     {
-        public NodeView StartNode => _startNode;
-        public NodeView EndNode => _endNode;
-
         public bool IsActive => gameObject.activeSelf;
 
-        public ulong Id => _id;
+        public ulong Id => _model.Id;
 
-        [SerializeField] private BoxCollider collider;
+        [SerializeField] private BoxCollider clickCollider;
         [SerializeField] private LineRenderer lineRenderer;
-
-        private ulong _id;
-
-        private NodeView _startNode;
-        private NodeView _endNode;
 
         private Vector3[] _linePoints;
 
         private bool _isInitialized;
-
-        public void SetId(ulong id)
-        {
-            _id = id;
-        }
-
-        public void SetNodes(NodeView startNode, NodeView endNode)
-        {
-            _startNode = startNode;
-            _endNode = endNode;
-
-            Redraw();
-        }
-
-        private void Redraw()
-        {
-            var position = (_startNode.Position + _endNode.Position) / 2f;
-            var rotation = Quaternion.LookRotation(_endNode.Position - _startNode.Position, Vector3.up);
-            var length = Vector3.Distance(_startNode.Position, _endNode.Position);
-            var size = collider.size;
-            size.y = lineRenderer.endWidth;
-            size.z = length;
-            collider.transform.position = position;
-            collider.transform.rotation = rotation;
-            collider.size = size;
-
-            _linePoints[0] = _startNode.Position;
-            _linePoints[1] = _endNode.Position;
-            lineRenderer.SetPositions(_linePoints);
-        }
+        private EdgeModel _model;
 
         public void Activate()
         {
@@ -66,6 +29,33 @@ namespace Shafir.GraphViews
         public void DeActivate()
         {
             gameObject.SetActive(false);
+            _model = null;
+        }
+
+        public void SetModel(EdgeModel edgeModel)
+        {
+            _model = edgeModel;
+            Redraw();
+        }
+
+        private void Redraw()
+        {
+            var startNode = _model.StartNode;
+            var endNode = _model.EndNode;
+            var position = (startNode.Position + endNode.Position) / 2f;
+            var rotation = Quaternion.LookRotation(endNode.Position - startNode.Position, Vector3.up);
+            var length = Vector3.Distance(startNode.Position, endNode.Position);
+            var size = clickCollider.size;
+            size.x = lineRenderer.endWidth;
+            size.y = lineRenderer.endWidth;
+            size.z = length;
+            clickCollider.transform.position = position;
+            clickCollider.transform.rotation = rotation;
+            clickCollider.size = size;
+
+            _linePoints[0] = startNode.Position;
+            _linePoints[1] = endNode.Position;
+            lineRenderer.SetPositions(_linePoints);
         }
 
         private void TryInitialize()
