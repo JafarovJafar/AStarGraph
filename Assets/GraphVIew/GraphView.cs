@@ -106,18 +106,8 @@ namespace Shafir.GraphViews
 
         private void CreateEdge(EdgeModel edgeModel)
         {
-            var isStartNodeFound = _nodeViews.TryGetValue(edgeModel.StartNode.Id, out var startNodeView);
-            var isEndNodeFound = _nodeViews.TryGetValue(edgeModel.EndNode.Id, out var endNodeView);
-
-            if (isStartNodeFound == false || isEndNodeFound == false)
-            {
-                Debug.LogError($"Одна из вершин ребра {edgeModel.Id} не найдена. Пропускаю создание вью ребра");
-                return;
-            }
-
             var edgeView = ShafirMonoPool.Get(edgeViewPrefab, edgesContainer);
-            edgeView.SetId(edgeModel.Id);
-            edgeView.SetNodes(startNodeView, endNodeView);
+            edgeView.SetModel(edgeModel);
             _edgeViews.Add(edgeModel.Id, edgeView);
         }
     }
