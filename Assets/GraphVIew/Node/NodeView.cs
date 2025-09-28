@@ -14,7 +14,7 @@ namespace Shafir.GraphViews
         public ulong Id => _model.Id;
 
         [SerializeField] private TextMeshPro text;
-        [SerializeField] private MeshRenderer renderer;
+        [SerializeField] private MeshRenderer bodyRenderer;
         [SerializeField] private Color defaultOutlineColor;
 
         private static readonly int BorderColorProperty = Shader.PropertyToID("_BorderColor");
@@ -46,7 +46,7 @@ namespace Shafir.GraphViews
 
         public void SetOutlineColor(Color color)
         {
-            renderer.material.SetColor(BorderColorProperty, color);
+            bodyRenderer.material.SetColor(BorderColorProperty, color);
         }
 
         public void ResetOutlineColor()

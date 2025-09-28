@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Shafir.GraphView::Shafir.GraphViews.NodeView
   text: {fileID: 1384837348845649055}
-  renderer: {fileID: 3614957630528347269}
+  bodyRenderer: {fileID: 3614957630528347269}
   defaultOutlineColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!135 &520567980666309179
 SphereCollider:
