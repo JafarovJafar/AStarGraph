@@ -11,7 +11,7 @@ namespace Shafir.FindLogics
     {
         private LinkedList<ulong> _nodesToProcess = new();
 
-        public override void Find(Graph graph, ulong startNodeId, ulong endNodeId, Action<FindOutput> finished)
+        public override FindOutput Find(SearchGraph graph, ulong startNodeId, ulong endNodeId)
         {
             var startTime = DateTime.Now;
 
@@ -36,12 +36,12 @@ namespace Shafir.FindLogics
             var seconds = DateTime.Now.Subtract(startTime).TotalSeconds;
             Output.SetDuration((float)seconds);
 
-            finished?.Invoke(Output);
+            return Output;
         }
 
         private void Prepare
         (
-            IReadOnlyDictionary<ulong, Node> nodes,
+            IReadOnlyDictionary<ulong, SearchNode> nodes,
             ulong startNodeId,
             LinkedList<ulong> nodesToProcess
         )
@@ -62,7 +62,7 @@ namespace Shafir.FindLogics
 
         private void CalculatePath
         (
-            IReadOnlyDictionary<ulong, Node> nodes,
+            IReadOnlyDictionary<ulong, SearchNode> nodes,
             ulong endNodeId,
             LinkedList<ulong> nodesToProcess
         )
@@ -80,7 +80,7 @@ namespace Shafir.FindLogics
 
                 foreach (var edge in edges)
                 {
-                    Node nextNode;
+                    SearchNode nextNode;
 
                     if (edge.StartNode == currentNode)
                         nextNode = edge.EndNode;
@@ -103,7 +103,8 @@ namespace Shafir.FindLogics
             }
         }
 
-        private List<ulong> CollectPath(IReadOnlyDictionary<ulong, Node> nodes, ulong startNodeId, ulong endNodeId)
+        private List<ulong> CollectPath(IReadOnlyDictionary<ulong, SearchNode> nodes, ulong startNodeId,
+            ulong endNodeId)
         {
             var result = new List<ulong>();
 
@@ -134,8 +135,8 @@ namespace Shafir.FindLogics
         /// <param name="linkedList">Связный список, в который необходимо добавить вершину</param>
         private void AddNodeToLinkedList
         (
-            IReadOnlyDictionary<ulong, Node> nodes,
-            Node nodeToAdd,
+            IReadOnlyDictionary<ulong, SearchNode> nodes,
+            SearchNode nodeToAdd,
             LinkedList<ulong> linkedList
         )
         {

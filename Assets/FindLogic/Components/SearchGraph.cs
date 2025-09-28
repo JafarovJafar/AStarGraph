@@ -5,20 +5,20 @@ namespace Shafir.FindLogics
     /// <summary>
     /// Граф для алгоритма поиска путей
     /// </summary>
-    public class Graph
+    public class SearchGraph
     {
-        public IReadOnlyDictionary<ulong, Node> Nodes => _nodes;
-        public IReadOnlyList<Edge> Edges => _edges;
+        public IReadOnlyDictionary<ulong, SearchNode> Nodes => _nodes;
+        public IReadOnlyList<SearchEdge> Edges => _edges;
 
-        private Dictionary<ulong, Node> _nodes = new();
-        private List<Edge> _edges = new();
+        private Dictionary<ulong, SearchNode> _nodes = new();
+        private List<SearchEdge> _edges = new();
 
         public void AddNode(ulong id)
         {
             if (_nodes.ContainsKey(id))
                 return;
 
-            var node = new Node(id);
+            var node = new SearchNode(id);
             _nodes[id] = node;
         }
 
@@ -30,7 +30,7 @@ namespace Shafir.FindLogics
             var startNode = _nodes[from];
             var endNode = _nodes[to];
 
-            var edge = new Edge(id, startNode, endNode, cost);
+            var edge = new SearchEdge(id, startNode, endNode, cost);
             startNode.AddEdge(edge);
             endNode.AddEdge(edge);
         }

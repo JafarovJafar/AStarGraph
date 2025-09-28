@@ -1,4 +1,5 @@
 using Shafir.FSM;
+using Shafir.GraphData;
 using Shafir.GraphViews;
 using UnityEngine;
 

@@ -1,13 +1,13 @@
 namespace Shafir.FindLogics
 {
-    public class Edge
+    public class SearchEdge
     {
         public readonly ulong Id;
-        public readonly Node StartNode;
-        public readonly Node EndNode;
+        public readonly SearchNode StartNode;
+        public readonly SearchNode EndNode;
         public readonly float Cost;
 
-        public Edge(ulong id, Node startNode, Node endNode, float cost)
+        public SearchEdge(ulong id, SearchNode startNode, SearchNode endNode, float cost)
         {
             Id = id;
             StartNode = startNode;
