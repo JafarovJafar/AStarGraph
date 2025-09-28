@@ -36,9 +36,9 @@ namespace Shafir.App
             Finished?.Invoke();
         }
 
-        private Graph GetFindGraph(GraphModel model)
+        private SearchGraph GetFindGraph(GraphModel model)
         {
-            var result = new Graph();
+            var result = new SearchGraph();
 
             foreach (var node in model.Nodes.Values)
             {
