@@ -46,6 +46,7 @@ namespace Shafir.GraphViews
             var rotation = Quaternion.LookRotation(_endNode.Position - _startNode.Position, Vector3.up);
             var length = Vector3.Distance(_startNode.Position, _endNode.Position);
             var size = collider.size;
+            size.x = lineRenderer.endWidth;
             size.y = lineRenderer.endWidth;
             size.z = length;
             collider.transform.position = position;
