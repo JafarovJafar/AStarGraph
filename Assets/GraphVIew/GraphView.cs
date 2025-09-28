@@ -131,6 +131,7 @@ namespace Shafir.GraphViews
             var edgeView = ShafirMonoPool.Get(edgeViewPrefab, edgesContainer);
             edgeView.SetId(edgeModel.Id);
             edgeView.SetNodes(startNodeView, endNodeView);
+            _edgeViews.Add(edgeModel.Id, edgeView);
         }
     }
 }

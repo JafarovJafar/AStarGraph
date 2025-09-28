@@ -36,7 +36,7 @@ namespace Shafir.App
         private void OnLeftMouseButtonClicked()
         {
             var camera = _appContext.MainCamera.Camera;
-            var mousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
+            var mousePosition = _appContext.UserInput.MousePosition;
 
             if (_appContext.Raycaster.TryRaycast(camera, mousePosition, out EntityView entityView) == false)
                 return;

@@ -19,7 +19,8 @@ namespace Shafir.RaycastSystem
 
         public bool TryRaycast<T>(Camera camera, Vector2 mousePosition, out T foundComponent)
         {
-            var ray = camera.ScreenPointToRay(mousePosition);
+            var finalMousePosition = new Vector3(mousePosition.x, mousePosition.y, 1f);
+            var ray = camera.ScreenPointToRay(finalMousePosition);
 
             if (Physics.Raycast(ray, out RaycastHit hitInfo, float.MaxValue) == true)
             {
@@ -39,7 +40,7 @@ namespace Shafir.RaycastSystem
 
             if (hitInfo.transform.TryGetComponent(out RaycastRetargeter retargeter) == true)
             {
-                if (retargeter.TryGetComponent(out foundComponent) == true)
+                if (retargeter.Target.TryGetComponent(out foundComponent) == true)
                 {
                     return true;
                 }

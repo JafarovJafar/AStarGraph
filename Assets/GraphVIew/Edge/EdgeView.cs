@@ -15,6 +15,7 @@ namespace Shafir.GraphViews
 
         public ulong Id => _id;
 
+        [SerializeField] private BoxCollider collider;
         [SerializeField] private LineRenderer lineRenderer;
 
         private ulong _id;
@@ -41,6 +42,16 @@ namespace Shafir.GraphViews
 
         private void Redraw()
         {
+            var position = (_startNode.Position + _endNode.Position) / 2f;
+            var rotation = Quaternion.LookRotation(_endNode.Position - _startNode.Position, Vector3.up);
+            var length = Vector3.Distance(_startNode.Position, _endNode.Position);
+            var size = collider.size;
+            size.y = lineRenderer.endWidth;
+            size.z = length;
+            collider.transform.position = position;
+            collider.transform.rotation = rotation;
+            collider.size = size;
+
             _linePoints[0] = _startNode.Position;
             _linePoints[1] = _endNode.Position;
             lineRenderer.SetPositions(_linePoints);
