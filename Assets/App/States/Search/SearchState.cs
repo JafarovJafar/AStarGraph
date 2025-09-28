@@ -43,6 +43,7 @@ namespace Shafir.App
             _appContext.LegendWindow.SetLegend(LegendText);
 
             _appContext.OutputWindow.Show();
+            _appContext.OutputWindow.Clear();
         }
 
         public void Exit()
