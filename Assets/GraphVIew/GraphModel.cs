@@ -69,8 +69,8 @@ namespace Shafir.GraphViews
         public void RemoveEdge(ulong edgeId)
         {
             var edge = _edges[edgeId];
-            RemoveEdgeFromNode(edgeId, edge.StartNode);
-            RemoveEdgeFromNode(edgeId, edge.EndNode);
+            edge.StartNode.RemoveEdge(edgeId);
+            edge.EndNode.RemoveEdge(edgeId);
             _edges.Remove(edgeId);
 
             EdgeRemoved?.Invoke(edgeId);
@@ -84,11 +84,6 @@ namespace Shafir.GraphViews
             var newNode = new NodeModel(id, pos);
             _nodes.Add(id, newNode);
             return newNode;
-        }
-
-        private void RemoveEdgeFromNode(ulong edgeId, NodeModel node)
-        {
-            node.RemoveEdge(edgeId);
         }
     }
 }
