@@ -25,8 +25,7 @@ namespace Shafir.App
         public void Enter()
         {
             _appContext.LoadingWindow.Show();
-
-            DoSearch();
+            DoSearch().Forget();
         }
 
         private async UniTaskVoid DoSearch()
