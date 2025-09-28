@@ -11,7 +11,7 @@ namespace Shafir.FindLogics
     {
         private LinkedList<ulong> _nodesToProcess = new();
 
-        public override void Find(SearchGraph graph, ulong startNodeId, ulong endNodeId, Action<FindOutput> finished)
+        public override FindOutput Find(SearchGraph graph, ulong startNodeId, ulong endNodeId)
         {
             var startTime = DateTime.Now;
 
@@ -36,7 +36,7 @@ namespace Shafir.FindLogics
             var seconds = DateTime.Now.Subtract(startTime).TotalSeconds;
             Output.SetDuration((float)seconds);
 
-            finished?.Invoke(Output);
+            return Output;
         }
 
         private void Prepare
@@ -103,7 +103,8 @@ namespace Shafir.FindLogics
             }
         }
 
-        private List<ulong> CollectPath(IReadOnlyDictionary<ulong, SearchNode> nodes, ulong startNodeId, ulong endNodeId)
+        private List<ulong> CollectPath(IReadOnlyDictionary<ulong, SearchNode> nodes, ulong startNodeId,
+            ulong endNodeId)
         {
             var result = new List<ulong>();
 

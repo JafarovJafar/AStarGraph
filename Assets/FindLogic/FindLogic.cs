@@ -17,6 +17,6 @@ namespace Shafir.FindLogics
             Output = new FindOutput();
         }
 
-        public abstract void Find(SearchGraph graph, ulong startNodeId, ulong endNodeId, Action<FindOutput> finished);
+        public abstract FindOutput Find(SearchGraph graph, ulong startNodeId, ulong endNodeId);
     }
 }

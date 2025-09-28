@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.cysharp.unitask": {
+      "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "ec9204d381eb406a8f6e68fd67429a96ca6c5322"
+    },
     "com.shafir.fsm": {
       "version": "https://github.com/JafarovJafar/shafir-fsm.git",
       "depth": 0,

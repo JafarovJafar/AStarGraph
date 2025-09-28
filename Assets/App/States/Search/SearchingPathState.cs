@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using Shafir.FindLogics;
 using Shafir.FSM;
 using Shafir.GraphData;
@@ -25,14 +26,18 @@ namespace Shafir.App
         {
             _appContext.LoadingWindow.Show();
 
+            DoSearch();
+        }
+
+        private async UniTaskVoid DoSearch()
+        {
             var searchModel = GetFindGraph(_appContext.GraphView.Model);
             var startNodeId = _searchContext.StartNodeId;
             var endNodeId = _searchContext.EndNodeId;
-            _appContext.FindLogic.Find(searchModel, startNodeId, endNodeId, OnSearchFinished);
-        }
+            var findLogic = _appContext.FindLogic;
 
-        private void OnSearchFinished(FindOutput findOutput)
-        {
+            await UniTask.RunOnThreadPool(() => findLogic.Find(searchModel, startNodeId, endNodeId));
+            await UniTask.SwitchToMainThread();
             Finished?.Invoke();
         }
 
