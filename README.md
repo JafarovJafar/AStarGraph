@@ -49,8 +49,8 @@ Unity-приложение позволяет вам в интерактивно
 
 - Движок: Unity 6000.2.2f1
 - Самописные решения:
-	- shafir-fsm (https://github.com/JafarovJafar/shafir-fsm.git)
-	- shafir-monopool (https://github.com/JafarovJafar/shafir-monopool.git)
+	- Shafir FSM (https://github.com/JafarovJafar/shafir-fsm.git)
+	- Shafir MonoPool (https://github.com/JafarovJafar/shafir-monopool.git)
 - Сторонние решения:
 	- UniTask (https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask)
 - Корректный порядок отрисовки (сначала ребра, потом путь, следом вершины) реализован при помощи Render Feature
